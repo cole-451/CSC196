@@ -2,6 +2,7 @@
 #include <iostream>
 #include "Core/random.h"
 #include "Renderer/Renderer.h"
+#include "Math/Vector2.h"
 
 using namespace parabellum;
 
@@ -10,6 +11,7 @@ int main(int argc, char* argv[]) {
     SDL_Init(SDL_INIT_VIDEO);
 	renderer.initialize();
 
+	vec2 v(30, 40);
 
 	renderer.createWindow("SDL3 Project", 1280, 1024);
    

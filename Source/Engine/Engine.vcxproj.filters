@@ -43,5 +43,8 @@
     <ClInclude Include="Renderer\Renderer.h">
       <Filter>Source\Renderer</Filter>
     </ClInclude>
+    <ClInclude Include="Math\Vector2.h">
+      <Filter>Source\Math</Filter>
+    </ClInclude>
   </ItemGroup>
 </Project>
