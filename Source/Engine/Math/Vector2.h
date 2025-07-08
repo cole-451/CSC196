@@ -10,10 +10,12 @@ struct Vector2
 	Vector2() = default;
 	Vector2(T x, T y) : x(x), y(y) {}
 
-	T operator [] (unsigned int index) const { assert(index < 2); return (&x)[index]; }
+	 T operator [] (unsigned int index) const { assert(index < 2); return (&x)[index]; }
 
-	T& operator [] (unsigned int index) const { assert(index < 2); 
-	return (&x)[index]; }
+	 T& operator [] (unsigned int index)  { 
+		assert(index < 2); 
+	return (&x)[index]; 
+	}
 
 
 	Vector2 operator + (const Vector2 v) {

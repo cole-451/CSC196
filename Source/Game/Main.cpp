@@ -16,7 +16,7 @@ int main(int argc, char* argv[]) {
     std::vector<vec2> stars;
 
     for (int i = 0; i < 100; i++) {
-        stars.push_back(vec2{random::getrandomfloat() * 1280, random::getrandomfloat() * 1024});
+        stars.push_back(vec2{random::getrandomfloat() * 1280.0f, random::getrandomfloat() * 1024.0f});
     }
 	vec2 v(30, 40);
 
@@ -26,11 +26,11 @@ int main(int argc, char* argv[]) {
     SDL_Event e;
     bool quit = false;
 
-    // Define a rectangle
-    SDL_FRect greenSquare{ 270, 190, 200, 200 };
 
 
+    //MAIN LOOP
     while (!quit) {
+		//parabellum::time::time.Tick(); // Update time, or if i could fucking figure it out
         while (SDL_PollEvent(&e)) {
             if (e.type == SDL_EVENT_QUIT) {
                 quit = true;
@@ -44,10 +44,10 @@ int main(int argc, char* argv[]) {
 
 
         for (auto& star : stars) {
-			star = star + speed; // Move each star by speed
-            if (star[0] > 1280 || star[0] > 1024) {
+			star += speed; // Move each star by speed
+            if (star[0] > 1280 || star[1] > 1024) {
 				star.x = 0; // Reset star position if it goes off screen
-            }
+			} //TODO: fix logic to reset star position
             renderer.setColor(random::getrandom() * 255, random::getrandom() * random::getrandom() * 255, 0, 255);
 			renderer.drawdot(star.x, star.y); // Draw each star
         }
