@@ -1,4 +1,5 @@
 #pragma once
+#include <cmath>
 
 namespace parabellum {
 	namespace math {
@@ -27,6 +28,12 @@ namespace parabellum {
 
 		using std::min;
 		using std::max;
+		using std::sqrt;
+		using std::sqrtf;
+		using std::sin;
+		using std::sinf;
+		using std::cos;
+		using std::cosf;
 		//using std::clamp;
 	}
 }

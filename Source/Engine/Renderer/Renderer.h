@@ -24,6 +24,8 @@ public:
 
 	void drawdot(float x, float y);
 
+
+
 private:
 	SDL_Window* current_window = nullptr;
 	SDL_Renderer* renderer = nullptr;
