@@ -4,13 +4,19 @@
 #include "Renderer/Renderer.h"
 #include "Math/Vector2.h"
 #include <vector>
+#include "Input/InputSystem.h"
 
 using namespace parabellum;
 
 int main(int argc, char* argv[]) {
 	Renderer renderer;
+    InputSystem inputsys;
+
+
+
     SDL_Init(SDL_INIT_VIDEO);
 	renderer.initialize();
+    inputsys.initialize();
 
 
     std::vector<vec2> stars;
@@ -37,6 +43,22 @@ int main(int argc, char* argv[]) {
             }
         }
 
+        inputsys.Update();
+
+        vec2 mouse = inputsys.getMousePos();
+
+        std::cout << inputsys.getMousePos().x << ","<< inputsys.getMousePos().y<<std::endl;
+
+
+        if (inputsys.getKeyPressed(SDL_SCANCODE_A)) {
+            std::cout << "morgan is annoying." << std::endl;
+        }
+
+
+        if (inputsys.GetMouseButtonDown(0)) {
+            std::cout << "yo mama!" << std::endl;
+        }
+
         vec2 speed{ 0.1f,0.1f };
         auto i = 10;
 		float length = speed.length();
@@ -46,8 +68,8 @@ int main(int argc, char* argv[]) {
         for (auto& star : stars) {
 			star += speed; // Move each star by speed
             if (star[0] > 1280 || star[1] > 1024) {
-				star.x = 0; // Reset star position if it goes off screen
-			} //TODO: fix logic to reset star position
+                star.x = 0;
+            }
             renderer.setColor(random::getrandom() * 255, random::getrandom() * random::getrandom() * 255, 0, 255);
 			renderer.drawdot(star.x, star.y); // Draw each star
         }
@@ -55,15 +77,6 @@ int main(int argc, char* argv[]) {
 
 		renderer.clear(); // Clear the renderer
        
-		//renderer.setColor(0, 0, 0, 255); // Set render draw color to black
-		//renderer.clear(); // Clear the renderer
-
-		//renderer.setColor(0, 255, 0, 255); // Set render draw color to green
-
-        //SDL_RenderFillRect(renderer, &greenSquare); // Render the rectangle
-
-
-        //renderer.present(); // Render the screen
 
     }
 
