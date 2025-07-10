@@ -32,9 +32,9 @@ void parabellum::InputSystem::Update()
 	prev_mouse_position = mouse_position;
 	uint32_t mouseButtonState = SDL_GetMouseState(&mouse_position.x, &mouse_position.y);
 
-	mousebutton_state[0] = mouseButtonState & SDL_BUTTON_LMASK;
-	mousebutton_state[1] = mouseButtonState & SDL_BUTTON_MMASK;
-	mousebutton_state[2] = mouseButtonState & SDL_BUTTON_RMASK;
+	mousebutton_state[(uint8_t)MouseButton::MOUSE_LEFT] = mouseButtonState & SDL_BUTTON_LMASK;
+	mousebutton_state[(uint8_t)MouseButton::MOUSE_MIDDLE] = mouseButtonState & SDL_BUTTON_MMASK;
+	mousebutton_state[(uint8_t)MouseButton::MOUSE_RIGHT] = mouseButtonState & SDL_BUTTON_RMASK;
 
 }
 

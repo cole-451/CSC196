@@ -8,6 +8,14 @@ namespace parabellum
 	class InputSystem
 	{
 	public:
+		enum class MouseButton : uint8_t {
+			MOUSE_LEFT,
+			MOUSE_MIDDLE,
+			MOUSE_RIGHT
+		};
+
+		
+	public:
 		InputSystem() = default;
 
 		bool initialize();
@@ -27,8 +35,11 @@ namespace parabellum
 
 		//MOUSE INPUT:
 
-		bool GetMouseButtonDown(uint8_t button) { return mousebutton_state[button]; }
-		bool GetPrevMouseButtonDown(uint8_t button) { return prev_mousebutton_state[button]; }
+		bool GetMouseButtonDown(MouseButton button) { return mousebutton_state[(uint8_t)button]; }
+		bool GetPrevMouseButtonDown(MouseButton button) { return prev_mousebutton_state[(uint8_t)button]; }
+		bool GetMouseButtonPressed(MouseButton button) {
+			return !prev_mousebutton_state[(uint8_t)button] && mousebutton_state[(uint8_t)button];
+		}
 
 	private:
 		std::vector<bool> keyboard_state;
