@@ -15,7 +15,7 @@ int main(int argc, char* argv[]) {
     InputSystem inputsys;
 
 
-
+    //inits.
     SDL_Init(SDL_INIT_VIDEO);
 	renderer.initialize();
     inputsys.initialize();
@@ -30,6 +30,10 @@ int main(int argc, char* argv[]) {
 
     std::vector<vec2> stars;
     std::vector<vec2> points;
+
+    // loading music vector
+    
+    std::vector<FMOD::Sound*> sounds;
 
     for (int i = 0; i < 100; i++) {
         stars.push_back(vec2{random::getrandomfloat() * 1280.0f, random::getrandomfloat() * 1024.0f});
@@ -47,6 +51,14 @@ int main(int argc, char* argv[]) {
     //load start sound
     FMOD::Sound* sound = nullptr;
     audio->createSound("test.wav", FMOD_DEFAULT, 0, &sound);
+
+    audio->createSound("bass.wav", FMOD_DEFAULT, 0, &sound);
+    sounds.push_back(sound);
+
+    audio->createSound("snare.wav", FMOD_DEFAULT, 0, &sound);
+    sounds.push_back(sound);
+
+    audio->createSound("open-hat.wav", FMOD_DEFAULT, 0, &sound);
 
     audio->playSound(sound, 0, false, nullptr);
 
