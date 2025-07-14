@@ -52,13 +52,14 @@ int main(int argc, char* argv[]) {
     FMOD::Sound* sound = nullptr;
     audio->createSound("test.wav", FMOD_DEFAULT, 0, &sound);
 
-    audio->createSound("bass.wav", FMOD_DEFAULT, 0, &sound);
+    audio->createSound("bass.wav", FMOD_DEFAULT, 0, &sound); // sounds[0]
     sounds.push_back(sound);
 
-    audio->createSound("snare.wav", FMOD_DEFAULT, 0, &sound);
+    audio->createSound("snare.wav", FMOD_DEFAULT, 0, &sound); // sounds[1]
     sounds.push_back(sound);
 
-    audio->createSound("open-hat.wav", FMOD_DEFAULT, 0, &sound);
+    audio->createSound("open-hat.wav", FMOD_DEFAULT, 0, &sound); // sounds[2]
+    sounds.push_back(sound);
 
     audio->playSound(sound, 0, false, nullptr);
 
@@ -95,6 +96,23 @@ int main(int argc, char* argv[]) {
 
         if (inputsys.getKeyPressed(SDL_SCANCODE_A)) {
             std::cout << "morgan is annoying." << std::endl;
+        }
+
+        if (inputsys.getKeyDown(SDL_SCANCODE_Q) && !inputsys.getPrevKeyDown(SDL_SCANCODE_Q))
+    
+    {
+        // play bass sound, vector elements can be accessed like an array with [#]
+            sound = sounds[0];
+            audio->playSound(sound, 0, false, nullptr);
+
+    }
+        if (inputsys.getKeyDown(SDL_SCANCODE_W) && !inputsys.getPrevKeyDown(SDL_SCANCODE_W)) {
+            sound = sounds[1];
+            audio->playSound(sound, 0, false, nullptr);
+        }
+        if (inputsys.getKeyDown(SDL_SCANCODE_E) && !inputsys.getPrevKeyDown(SDL_SCANCODE_E)) {
+            sound = sounds[2];
+            audio->playSound(sound, 0, false, nullptr);
         }
 
 
