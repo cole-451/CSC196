@@ -1,10 +1,12 @@
 #include <SDL3/SDL.h>
 #include <iostream>
 #include "Core/random.h"
+#include "Core/StringHelper.h"
 #include "Renderer/Renderer.h"
 #include "Math/Vector2.h"
 #include <vector>
 #include "Input/InputSystem.h"
+#include "Audio/AudioSys.h"
 
 #include <fmod.hpp>
 
@@ -24,8 +26,11 @@ int main(int argc, char* argv[]) {
     FMOD::System* audio;
     FMOD::System_Create(&audio);
 
+   
+    
+
     void* extradriverdata = nullptr;
-    audio->init(32, FMOD_INIT_NORMAL, extradriverdata);
+    audio->init(32, FMOD_INIT_NORMAL, extradriverdata); //inits channels
 
 
     std::vector<vec2> stars;
