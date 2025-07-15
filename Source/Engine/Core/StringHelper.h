@@ -9,4 +9,11 @@ namespace parabellum {
 		}
 		return result;
 	}
+	inline std::string toHigher(const std::string& string) {
+		std::string result = string;
+		for (char& c : result) {
+			c = std::toupper(c);
+		}
+		return result;
+	}
 }
