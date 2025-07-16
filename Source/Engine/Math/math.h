@@ -1,8 +1,8 @@
 #pragma once
 #include <cmath>
+#include <algorithm>
 
-namespace parabellum {
-	namespace math {
+namespace parabellum::math {
 		constexpr float pi = 3.14f; //constant expression; they will be evaluated at runtime
 		constexpr float twoPi = 2 * pi;
 		constexpr float halfPi = pi / 2;
@@ -34,6 +34,9 @@ namespace parabellum {
 		using std::sinf;
 		using std::cos;
 		using std::cosf;
+		using std::atan2;
+		using std::atan2f;
+
 		//using std::clamp;
-	}
+	
 }

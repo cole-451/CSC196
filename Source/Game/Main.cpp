@@ -8,6 +8,7 @@
 #include <vector>
 #include "Input/InputSystem.h"
 #include "Audio/AudioSys.h"
+#include "Renderer/Model.h"
 
 #include <fmod.hpp>
 
@@ -26,6 +27,19 @@ int main(int argc, char* argv[]) {
     // create audio system
     FMOD::System* audio;
     FMOD::System_Create(&audio);
+
+
+    //create model
+    std::vector<vec2> model_points{
+        {-5, -5},
+        {5, -5},
+        {5,5},
+        {-5, 5},
+        {-5,-5},
+    };
+
+    // construct model with points above and preset color
+    Model model{ model_points, {0,0,1} };
 
    
     
@@ -139,7 +153,10 @@ int main(int argc, char* argv[]) {
         auto i = 10;
 		float length = speed.length();
 
+        vec3 color{ 0,0,1 };
 
+        renderer.setColor(color.r, color.g, color.b);
+        model.Draw(renderer, inputsys.getMousePos(),math::halfPi * 0.5f, 10.0f);
 
         //drawing
         for (auto& star : stars) {
@@ -153,6 +170,7 @@ int main(int argc, char* argv[]) {
 		renderer.present(); // Render the screen
 
 		renderer.clear(); // Clear the renderer
+
        
 
     }

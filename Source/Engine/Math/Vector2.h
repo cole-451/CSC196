@@ -92,6 +92,18 @@ struct Vector2
 		return (x * x) + (y * y);
 	}
 
+	Vector2 Normalized() const { return *this /length() ; } // REMEMBER: * can be used to dereference
+
+
+
+	//returns angle in radians between the positive x axis and the point x,y
+	float Angle() const { return parabellum::math::atan2(y, x); }
+
+	Vector2 Rotate(float radians) const {
+		Vector2 v;
+		v.x = x * parabellum::math::cosf(radians) - y * parabellum::math:sinf(radians);
+		v.y = x * parabellum::math::sinf(radians) - y * parabellum::math::cosf(radians);
+	}
 };
 
 using ivec2 = Vector2<int>;

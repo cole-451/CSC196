@@ -1,6 +1,7 @@
 #pragma once
 #include "../Math/Vector2.h"
 #include "../Math/Vector3.h"
+#include "Renderer.h"
 #include <vector>
 
 namespace parabellum {
@@ -12,11 +13,14 @@ namespace parabellum {
 			m_color{color}
 		{ }
 
-		void Draw(class Renderer& renderer);
+		void Draw(class Renderer& renderer, const vec2 position,float rotation, float scale);
 		
 
 	private:
 		std::vector<vec2> m_points;
 		vec3 m_color{};
 	};
+
+
+
 }
