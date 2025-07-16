@@ -14,6 +14,8 @@ public:
 
 	void setColor(Uint8 r, Uint8 g, Uint8 b, Uint8  a = 185);
 
+	void setColor(float r, float g, float b, float  a = 1.0f);
+
 	void clear();
 
 	void present();

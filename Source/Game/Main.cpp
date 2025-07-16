@@ -4,6 +4,7 @@
 #include "Core/StringHelper.h"
 #include "Renderer/Renderer.h"
 #include "Math/Vector2.h"
+//#include "Math/Vector3.h"
 #include <vector>
 #include "Input/InputSystem.h"
 #include "Audio/AudioSys.h"
@@ -146,7 +147,7 @@ int main(int argc, char* argv[]) {
             if (star[0] > 1280 || star[1] > 1024) {
                 star.x = 0;
             }
-            renderer.setColor(random::getrandom() * 255, random::getrandom() * random::getrandom() * 255, 0, 255);
+            renderer.setColor((uint8_t)random::getrandom() * 255, (uint8_t)random::getrandom() * (uint8_t)random::getrandom() * 255, (uint8_t)0, (uint8_t)255);
 			renderer.drawdot(star.x, star.y); // Draw each star
         }
 		renderer.present(); // Render the screen

@@ -6,7 +6,12 @@
 template<typename T>
 struct Vector2
 {
-	T x, y;
+	union {
+		struct{ T x, y; };
+		struct { T u, v; };
+
+	};
+	
 	Vector2() = default;
 	Vector2(T x, T y) : x(x), y(y) {}
 

@@ -8,7 +8,13 @@ struct Vector3
 {
 	T x, y;
 	Vector3() = default;
-	Vector3(T x, T y, Tz) : x(x), y(y), z(z) {}
+	union {
+	struct { T x, y, z; };
+	struct { T r, g, b; };
+
+
+	};
+	Vector3(T x, T y, T z) : x(x), y(y), z(z) {}
 
 	 T operator [] (unsigned int index) const { assert(index < 3); return (&x)[index]; }
 
@@ -74,24 +80,24 @@ struct Vector3
 		return Vector3{ x += s, y += s, z +=s };
 	}
 	Vector3 operator -= (float s) const {
-		return Vector3{ x -= s, y -= s };
+		return Vector3{ x -= s, y -= s , z -=s};
 	}
 	Vector3 operator *= (float s) const {
-		return Vector3{ x *= s, y *= s };
+		return Vector3{ x *= s, y *= s, z *= s };
 	}
 	Vector3 operator /= (float s) const {
-		return Vector3{ x /= s, y /= s };
+		return Vector3{ x /= s, y /= s, y/= s };
 	}
 
 
 	float length() {
-		return sqrt(x * x + y * y);
+		return sqrt(x * x + y * y + z * z);
 	}
 	float lengthSqr() {
-		return (x * x) + (y * y);
+		return (x * x) + (y * y) + (z * z);
 	}
 
 };
 
-using ivec2 = Vector3<int>;
-using vec2 = Vector3<float>;
+using ivec3 = Vector3<int>;
+using vec3 = Vector3<float>;

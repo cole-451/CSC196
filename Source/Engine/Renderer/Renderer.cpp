@@ -40,6 +40,12 @@
         SDL_SetRenderDrawColor(renderer, r, g, b, a);
     }
 
+    void Renderer::setColor(float r, float g, float b, float  a) {
+
+        SDL_SetRenderDrawColorFloat(renderer, r, g, b, a);
+    }
+
+
     void Renderer::clear()
     {
         SDL_RenderClear(renderer);
