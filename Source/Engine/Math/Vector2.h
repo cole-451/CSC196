@@ -101,8 +101,9 @@ struct Vector2
 
 	Vector2 Rotate(float radians) const {
 		Vector2 v;
-		v.x = x * parabellum::math::cosf(radians) - y * parabellum::math:sinf(radians);
+		v.x = x * parabellum::math::cosf(radians) - y * parabellum::math::sinf(radians);
 		v.y = x * parabellum::math::sinf(radians) - y * parabellum::math::cosf(radians);
+		return v;
 	}
 };
 

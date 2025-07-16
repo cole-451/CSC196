@@ -4,11 +4,14 @@
 #include "Core/StringHelper.h"
 #include "Renderer/Renderer.h"
 #include "Math/Vector2.h"
-//#include "Math/Vector3.h"
+#include "Math/Vector3.h"
+#include "Math/Transform.h"
 #include <vector>
 #include "Input/InputSystem.h"
 #include "Audio/AudioSys.h"
 #include "Renderer/Model.h"
+#include"Core/Time.h"
+#include "Game/Actor.h"
 
 #include <fmod.hpp>
 
@@ -28,6 +31,8 @@ int main(int argc, char* argv[]) {
     FMOD::System* audio;
     FMOD::System_Create(&audio);
 
+    Time::Time();
+
 
     //create model
     std::vector<vec2> model_points{
@@ -37,9 +42,21 @@ int main(int argc, char* argv[]) {
         {-5, 5},
         {-5,-5},
     };
+    // makes a square by connecting these points.
 
     // construct model with points above and preset color
-    Model model{ model_points, {0,0,1} };
+    Model* model = new Model{ model_points, {0,0,1} }; // remember to delete later
+
+    Transform tf(vec2{ 500,500 }, 0.0f, 1.0f);
+
+
+    //declare and create actor
+    std::vector<Actor> actors;
+    for (int i = 0; i < 10; i++) {
+        Transform tf(vec2{ random::getrandomfloat(), random::getrandomfloat() }, 0.0f, 1.0f);
+    Actor actor1(tf, model);
+    actors.push_back(actor1);
+    }
 
    
     
@@ -83,9 +100,14 @@ int main(int argc, char* argv[]) {
 
     audio->playSound(sound, 0, false, nullptr);
 
+
+    if (inputsys.getKeyDown(SDL_SCANCODE_A)) {
+    }
+    // maybe make a controller?
+
     //MAIN LOOP
     while (!quit) {
-		//parabellum::time::time.Tick(); // Update time, or if i could fucking figure it out
+		//time.Tick(); // Update time, or if i could fucking figure it out
         while (SDL_PollEvent(&e)) {
             if (e.type == SDL_EVENT_QUIT) {
                 quit = true;
@@ -114,8 +136,9 @@ int main(int argc, char* argv[]) {
         }
 
 
-        if (inputsys.getKeyPressed(SDL_SCANCODE_A)) {
-            std::cout << "morgan is annoying." << std::endl;
+        if (inputsys.getKeyDown(SDL_SCANCODE_A)) {
+            tf.rotation += 1; //* time.getDeltaTime;
+
         }
 
         if (inputsys.getKeyDown(SDL_SCANCODE_Q) && !inputsys.getPrevKeyDown(SDL_SCANCODE_Q))
@@ -126,6 +149,7 @@ int main(int argc, char* argv[]) {
             audio->playSound(sound, 0, false, nullptr);
 
     }
+
         if (inputsys.getKeyDown(SDL_SCANCODE_W) && !inputsys.getPrevKeyDown(SDL_SCANCODE_W)) {
             sound = sounds[1];
             audio->playSound(sound, 0, false, nullptr);
@@ -146,6 +170,13 @@ int main(int argc, char* argv[]) {
             }
         }
 
+        vec2 direction = { 0,0 };
+        if (inputsys.getKeyDown(SDL_SCANCODE_W)) {
+            return direction.y +=1;
+        }
+
+        //direction.Normalized(); fix line 95 in vector2.h
+
 
         
 
@@ -156,7 +187,7 @@ int main(int argc, char* argv[]) {
         vec3 color{ 0,0,1 };
 
         renderer.setColor(color.r, color.g, color.b);
-        model.Draw(renderer, inputsys.getMousePos(),math::halfPi * 0.5f, 10.0f);
+        model->Draw(renderer, inputsys.getMousePos(),math::halfPi * 0.5f, 10.0f); // once its a pointer, this.that turns to this->that
 
         //drawing
         for (auto& star : stars) {

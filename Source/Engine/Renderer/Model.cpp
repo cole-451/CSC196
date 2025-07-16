@@ -1,5 +1,7 @@
 #include "Model.h"
 #include "Renderer.h"
+#include "../Math/Transform.h"
+
 
 
 
@@ -17,5 +19,9 @@ namespace parabellum {
 			vec2 p2 = (m_points[i + 1].Rotate(rotation) * scale) + position;
 			renderer.drawline(p1.x, p1.y, p2.x, p2.y);
 		}
+	}
+	void Model::Draw(Renderer& renderer, const Transform& transform)
+	{
+		Draw(renderer, transform.position, transform.rotation, transform.scale);
 	}
 }
