@@ -13,25 +13,36 @@
 #include"Core/Time.h"
 #include "Game/Actor.h"
 
+#include "Player.h"
+
 #include <fmod.hpp>
+#include <memory>
 
 using namespace parabellum;
 
 int main(int argc, char* argv[]) {
 	Renderer renderer;
-    InputSystem inputsys;
+    //InputSystem inputsys;
 
 
     //inits.
+
+
     SDL_Init(SDL_INIT_VIDEO);
+    //TODO: make this also into a unique_ptr and fix all the refrences below
 	renderer.initialize();
-    inputsys.initialize();
+
+    std::unique_ptr<InputSystem> inputsys = std::make_unique<InputSystem>();
+    inputsys->initialize();
 
     // create audio system
-    FMOD::System* audio;
-    FMOD::System_Create(&audio);
+    std::unique_ptr<audiosys> audio = std::make_unique<audiosys>();
+    audio->init();
+
 
     Time::Time();
+
+    
 
 
     //create model
@@ -45,25 +56,27 @@ int main(int argc, char* argv[]) {
     // makes a square by connecting these points.
 
     // construct model with points above and preset color
-    Model* model = new Model{ model_points, {0,0,1} }; // remember to delete later
+    std::shared_ptr<Model> model = std::make_shared<Model>(model_points, vec3{ 0,0,1 });
+
 
     Transform tf(vec2{ 500,500 }, 0.0f, 1.0f);
 
 
     //declare and create actor
-    std::vector<Actor> actors;
+    std::vector<std::unique_ptr<Actor>> actors;
     for (int i = 0; i < 10; i++) {
         Transform tf(vec2{ random::getrandomfloat(), random::getrandomfloat() }, 0.0f, 1.0f);
+
     Actor actor1(tf, model);
-    actors.push_back(actor1);
+    std::unique_ptr<Player> player = std::make_unique<Player>(tf, model);
+    actors.push_back(std::move(player));
     }
 
-   
-    
+    //create the player
+
+    Player player();
 
     void* extradriverdata = nullptr;
-    audio->init(32, FMOD_INIT_NORMAL, extradriverdata); //inits channels
-
 
     std::vector<vec2> stars;
     std::vector<vec2> points;
@@ -87,21 +100,21 @@ int main(int argc, char* argv[]) {
 
     //load start sound
     FMOD::Sound* sound = nullptr;
-    audio->createSound("test.wav", FMOD_DEFAULT, 0, &sound);
+    //audio->createSound("test.wav", FMOD_DEFAULT, 0, &sound); you'll need to de-reference all of these
 
-    audio->createSound("bass.wav", FMOD_DEFAULT, 0, &sound); // sounds[0]
-    sounds.push_back(sound);
+    //audio->createSound("bass.wav", FMOD_DEFAULT, 0, &sound); // sounds[0]
+    //sounds.push_back(sound);
 
-    audio->createSound("snare.wav", FMOD_DEFAULT, 0, &sound); // sounds[1]
-    sounds.push_back(sound);
+    //audio->createSound("snare.wav", FMOD_DEFAULT, 0, &sound); // sounds[1]
+    //sounds.push_back(sound);
 
-    audio->createSound("open-hat.wav", FMOD_DEFAULT, 0, &sound); // sounds[2]
-    sounds.push_back(sound);
+    //audio->createSound("open-hat.wav", FMOD_DEFAULT, 0, &sound); // sounds[2]
+    //sounds.push_back(sound);
 
-    audio->playSound(sound, 0, false, nullptr);
+    //audio->playSound(sound, 0, false, nullptr);
 
 
-    if (inputsys.getKeyDown(SDL_SCANCODE_A)) {
+    if (inputsys->getKeyDown(SDL_SCANCODE_A)) {
     }
     // maybe make a controller?
 
@@ -115,15 +128,15 @@ int main(int argc, char* argv[]) {
         }
 
         //update
-        inputsys.Update();
+        inputsys->Update();
         audio->update();
 
-        vec2 mouse = inputsys.getMousePos();
+        vec2 mouse = inputsys->getMousePos();
 
-        std::cout << inputsys.getMousePos().x << ","<< inputsys.getMousePos().y<<std::endl;
+        std::cout << inputsys->getMousePos().x << ","<< inputsys->getMousePos().y<<std::endl;
 
-        if (inputsys.GetMouseButtonPressed(parabellum::InputSystem::MouseButton::MOUSE_LEFT)) {
-            points.push_back(inputsys.getMousePos());
+        if (inputsys->GetMouseButtonPressed(parabellum::InputSystem::MouseButton::MOUSE_LEFT)) {
+            points.push_back(inputsys->getMousePos());
         }
         for (int i = 0; i < (int)points.size() - 1; i++) {
             // set color or random color
@@ -136,32 +149,32 @@ int main(int argc, char* argv[]) {
         }
 
 
-        if (inputsys.getKeyDown(SDL_SCANCODE_A)) {
+        if (inputsys->getKeyDown(SDL_SCANCODE_A)) {
             tf.rotation += 1; //* time.getDeltaTime;
 
         }
 
-        if (inputsys.getKeyDown(SDL_SCANCODE_Q) && !inputsys.getPrevKeyDown(SDL_SCANCODE_Q))
+        if (inputsys->getKeyDown(SDL_SCANCODE_Q) && !inputsys->getPrevKeyDown(SDL_SCANCODE_Q))
     
     {
         // play bass sound, vector elements can be accessed like an array with [#]
             sound = sounds[0];
-            audio->playSound(sound, 0, false, nullptr);
+            //audio->playSound(sound, 0, false, nullptr);
 
     }
 
-        if (inputsys.getKeyDown(SDL_SCANCODE_W) && !inputsys.getPrevKeyDown(SDL_SCANCODE_W)) {
+        if (inputsys->getKeyDown(SDL_SCANCODE_W) && !inputsys->getPrevKeyDown(SDL_SCANCODE_W)) {
             sound = sounds[1];
-            audio->playSound(sound, 0, false, nullptr);
+            //audio->playSound(sound, 0, false, nullptr);
         }
-        if (inputsys.getKeyDown(SDL_SCANCODE_E) && !inputsys.getPrevKeyDown(SDL_SCANCODE_E)) {
+        if (inputsys->getKeyDown(SDL_SCANCODE_E) && !inputsys->getPrevKeyDown(SDL_SCANCODE_E)) {
             sound = sounds[2];
-            audio->playSound(sound, 0, false, nullptr);
+            //audio->playSound(sound, 0, false, nullptr);
         }
 
 
-        if (inputsys.GetMouseButtonDown(parabellum::InputSystem::MouseButton::MOUSE_LEFT)) {
-            vec2 position = inputsys.getMousePos();
+        if (inputsys->GetMouseButtonDown(parabellum::InputSystem::MouseButton::MOUSE_LEFT)) {
+            vec2 position = inputsys->getMousePos();
             if (points.size() == 0) { 
                 points.push_back(position); 
             }
@@ -171,7 +184,7 @@ int main(int argc, char* argv[]) {
         }
 
         vec2 direction = { 0,0 };
-        if (inputsys.getKeyDown(SDL_SCANCODE_W)) {
+        if (inputsys->getKeyDown(SDL_SCANCODE_W)) {
             return direction.y +=1;
         }
 
@@ -187,7 +200,7 @@ int main(int argc, char* argv[]) {
         vec3 color{ 0,0,1 };
 
         renderer.setColor(color.r, color.g, color.b);
-        model->Draw(renderer, inputsys.getMousePos(),0.0f, 50.0f); // once its a pointer, this.that turns to this->that
+        model->Draw(renderer, inputsys->getMousePos(),0.0f, 50.0f); // once its a pointer, this.that turns to this->that
 
         //drawing
         for (auto& star : stars) {
@@ -206,6 +219,8 @@ int main(int argc, char* argv[]) {
 
     }
 
+
     renderer.GTFO();
+    
     return 0;
 }
