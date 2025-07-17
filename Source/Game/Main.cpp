@@ -36,11 +36,11 @@ int main(int argc, char* argv[]) {
 
     //create model
     std::vector<vec2> model_points{
-        {-5, -5},
-        {5, -5},
-        {5,5},
-        {-5, 5},
-        {-5,-5},
+        {-1, -3},
+        {1, -3},
+        {1,2},
+        {-1, 2},
+        {-1,-3},
     };
     // makes a square by connecting these points.
 
@@ -187,7 +187,7 @@ int main(int argc, char* argv[]) {
         vec3 color{ 0,0,1 };
 
         renderer.setColor(color.r, color.g, color.b);
-        model->Draw(renderer, inputsys.getMousePos(),math::halfPi * 0.5f, 10.0f); // once its a pointer, this.that turns to this->that
+        model->Draw(renderer, inputsys.getMousePos(),0.0f, 50.0f); // once its a pointer, this.that turns to this->that
 
         //drawing
         for (auto& star : stars) {
