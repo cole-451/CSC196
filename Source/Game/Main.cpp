@@ -14,6 +14,7 @@
 #include "Game/Actor.h"
 
 #include "Player.h"
+#include "Game/Scene.h"
 
 #include <fmod.hpp>
 #include <memory>
@@ -42,7 +43,7 @@ int main(int argc, char* argv[]) {
 
     Time::Time();
 
-    
+    Scene scene1;
 
 
     //create model
