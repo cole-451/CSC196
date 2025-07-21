@@ -11,10 +11,14 @@
 #include "Audio/AudioSys.h"
 #include "Renderer/Model.h"
 #include"Core/Time.h"
-#include "Game/Actor.h"
+#include "Framework/Actor.h"
 
 #include "Player.h"
-#include "Game/Scene.h"
+#include "Framework/Scene.h"
+#include "SpaceGame.h"
+
+
+#include "Engine.h"
 
 #include <fmod.hpp>
 #include <memory>
@@ -22,8 +26,12 @@
 using namespace parabellum;
 
 int main(int argc, char* argv[]) {
+
+    std::unique_ptr<SpaceGame> game = std::make_unique<SpaceGame>();
 	Renderer renderer;
     //InputSystem inputsys;
+
+    getEngine().getRenderer().initialize();
 
 
     //inits.
@@ -47,31 +55,9 @@ int main(int argc, char* argv[]) {
 
 
     //create model
-    std::vector<vec2> model_points{
-        {-1, -3},
-        {1, -3},
-        {1,2},
-        {-1, 2},
-        {-1,-3},
-    };
-    // makes a square by connecting these points.
+    SpaceGame spacegame;
+    
 
-    // construct model with points above and preset color
-    std::shared_ptr<Model> model = std::make_shared<Model>(model_points, vec3{ 0,0,1 });
-
-
-    Transform tf(vec2{ 500,500 }, 0.0f, 1.0f);
-
-
-    //declare and create actor
-    std::vector<std::unique_ptr<Actor>> actors;
-    for (int i = 0; i < 10; i++) {
-        Transform tf(vec2{ random::getrandomfloat(), random::getrandomfloat() }, 0.0f, 1.0f);
-
-    Actor actor1(tf, model);
-    std::unique_ptr<Player> player = std::make_unique<Player>(tf, model);
-    actors.push_back(std::move(player));
-    }
 
     //create the player
 
@@ -121,7 +107,7 @@ int main(int argc, char* argv[]) {
 
     //MAIN LOOP
     while (!quit) {
-		//time.Tick(); // Update time, or if i could fucking figure it out
+		//time.Tick(); // Update time, if i could fucking figure it out
         while (SDL_PollEvent(&e)) {
             if (e.type == SDL_EVENT_QUIT) {
                 quit = true;

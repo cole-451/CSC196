@@ -1,6 +1,7 @@
 #pragma once
 #include <vector>
 #include <memory> 
+#include "Actor.h"
 
 namespace parabellum {
 	class Scene {

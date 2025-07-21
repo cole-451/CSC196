@@ -13,6 +13,10 @@ namespace parabellum {
 			actor->Draw(renderer);
 		}
 	}
+	void Scene::AddActor(std::unique_ptr<Actor> actor)
+	{
+
+	}
 	/*void Scene::AddActor(std::unique_ptr<Actor> actor)
 	{
 		//Find out why this is bugged.
