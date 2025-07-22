@@ -137,7 +137,7 @@ int main(int argc, char* argv[]) {
 
 
         if (inputsys->getKeyDown(SDL_SCANCODE_A)) {
-            tf.rotation += 1; //* time.getDeltaTime;
+            //tf.rotation += 1; //* time.getDeltaTime;
 
         }
 
@@ -187,7 +187,7 @@ int main(int argc, char* argv[]) {
         vec3 color{ 0,0,1 };
 
         renderer.setColor(color.r, color.g, color.b);
-        model->Draw(renderer, inputsys->getMousePos(),0.0f, 50.0f); // once its a pointer, this.that turns to this->that
+        //model->Draw(renderer, inputsys->getMousePos(),0.0f, 50.0f); // once its a pointer, this.that turns to this->that
 
         //drawing
         for (auto& star : stars) {
