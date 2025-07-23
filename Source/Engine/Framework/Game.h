@@ -11,7 +11,7 @@ namespace parabellum {
 
 
 		virtual bool initialize() = 0;
-		virtual void update() = 0;
+		virtual void Update() = 0;
 		virtual void GTFO() = 0;
 		virtual void Draw() = 0;
 	

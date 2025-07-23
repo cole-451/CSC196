@@ -123,7 +123,6 @@ int main(int argc, char* argv[]) {
 
     //MAIN LOOP
     while (!quit) {
-		//time.Tick(); // Update time, if i could fucking figure it out
         while (SDL_PollEvent(&e)) {
             if (e.type == SDL_EVENT_QUIT) {
                 quit = true;

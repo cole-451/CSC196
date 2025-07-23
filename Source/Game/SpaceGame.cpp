@@ -35,7 +35,7 @@ bool SpaceGame::initialize()
     return false;
 }
 
-void SpaceGame::update()
+void SpaceGame::Update()
 {
 }
 

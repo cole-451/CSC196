@@ -190,7 +190,7 @@
   <ItemGroup>
     <ClInclude Include="Audio\AudioSys.h" />
     <ClInclude Include="Core\File.h" />
-    <ClInclude Include="Core\random.h" />
+    <ClInclude Include="Core\Random.h" />
     <ClInclude Include="Core\StringHelper.h" />
     <ClInclude Include="Core\Time.h" />
     <ClInclude Include="Engine.h" />
@@ -198,7 +198,7 @@
     <ClInclude Include="Framework\Game.h" />
     <ClInclude Include="Framework\Scene.h" />
     <ClInclude Include="Input\InputSystem.h" />
-    <ClInclude Include="Math\math.h" />
+    <ClInclude Include="Math\Math.h" />
     <ClInclude Include="Math\Transform.h" />
     <ClInclude Include="Math\Vector2.h" />
     <ClInclude Include="Math\Vector3.h" />

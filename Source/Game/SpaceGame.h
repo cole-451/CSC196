@@ -12,7 +12,7 @@ private:
 	// Inherited via Game
 	bool initialize() override;
 
-	void update() override;
+	void Update() override;
 
 	void GTFO() override;
 
