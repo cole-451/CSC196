@@ -14,6 +14,15 @@ void Player::Update(float dt)
 	if (parabellum::getEngine().getInputSys().getKeyDown(SDL_SCANCODE_W)) {
 		direction.y = -1;
 	}
+	if (parabellum::getEngine().getInputSys().getKeyDown(SDL_SCANCODE_S)) {
+		direction.y = 1;
+	}
+	if (parabellum::getEngine().getInputSys().getKeyDown(SDL_SCANCODE_A)) {
+		direction.x = -1;
+	}
+	if (parabellum::getEngine().getInputSys().getKeyDown(SDL_SCANCODE_D)) {
+		direction.x = 1;
+	}
 
 	m_transform.rotation *= (rotate * rotationRate) * dt;
 
