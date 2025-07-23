@@ -42,7 +42,6 @@ bool parabellum::audiosys::addSound(const std::string& filename, const std::stri
 		c = std::tolower(c);
 	}
 
-	soundmap.find(key);
 	if (soundmap.find(key) != soundmap.end()) {
 		std::cerr << "audio name already exists you dumb fuck" << key << std::endl;
 		return false;

@@ -85,14 +85,14 @@ struct Vector2
 	}
 
 
-	float length() {
+	float length() const {
 		return sqrt(x * x + y * y);
 	}
-	float lengthSqr() {
+	float lengthSqr() const {
 		return (x * x) + (y * y);
 	}
 
-	Vector2 Normalized() const { return *this /length() ; } // REMEMBER: * can be used to dereference
+	Vector2 Normalized() const { return *this / length() ; } // REMEMBER: * can be used to dereference
 
 
 

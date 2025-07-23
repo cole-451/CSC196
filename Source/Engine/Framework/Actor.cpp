@@ -3,7 +3,7 @@
 
 void parabellum::Actor::Update(float dt)
 {
-	
+	// m_transform does huh times dt;
 }
 
 void parabellum::Actor::Draw(Renderer& renderer)

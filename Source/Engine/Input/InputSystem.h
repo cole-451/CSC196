@@ -45,8 +45,8 @@ namespace parabellum
 		std::vector<bool> keyboard_state;
 		std::vector<bool> prev_keyboard_state;
 
-		vec2 mouse_position;
-		vec2 prev_mouse_position;
+		vec2 mouse_position = { 0,0 };
+		vec2 prev_mouse_position = { 0,0 };
 
 		std::array<bool, 3> mousebutton_state { false, false, false };
 		std::array<bool, 3> prev_mousebutton_state{ false, false, false };

@@ -16,6 +16,8 @@
 #include "Player.h"
 #include "Framework/Scene.h"
 #include "SpaceGame.h"
+#include "Renderer/Font.h"
+#include "Renderer/Text.h"
 
 
 #include "Engine.h"
@@ -31,7 +33,13 @@ int main(int argc, char* argv[]) {
 	Renderer renderer;
     //InputSystem inputsys;
 
-    getEngine().getRenderer().initialize();
+    //getEngine().initialize();
+
+    //getEngine().getRenderer().initialize();
+
+   // getEngine().getRenderer().createWindow("parabellum engine", 1280, 1024);
+
+    
 
 
     //inits.
@@ -61,7 +69,7 @@ int main(int argc, char* argv[]) {
 
     //create the player
 
-    Player player();
+    Player player;
 
     void* extradriverdata = nullptr;
 
@@ -78,6 +86,12 @@ int main(int argc, char* argv[]) {
 	vec2 v(30, 40);
 
 	renderer.createWindow("SDL3 Project", 1280, 1024);
+
+    Font* font = new Font();
+    font->Load("Brianne_s_hand.ttf", 20);
+
+    Text* text = new Text(font);
+    text->Create(renderer, "Hello World", vec3{ 1, 1, 1 });
    
 
     SDL_Event e;
@@ -85,7 +99,9 @@ int main(int argc, char* argv[]) {
 
 
 
-    //load start sound
+
+
+    //load start sound TODO: replace old calls with updated getEngine() calls
     FMOD::Sound* sound = nullptr;
     //audio->createSound("test.wav", FMOD_DEFAULT, 0, &sound); you'll need to de-reference all of these
 
@@ -170,10 +186,10 @@ int main(int argc, char* argv[]) {
             }
         }
 
-        vec2 direction = { 0,0 };
-        if (inputsys->getKeyDown(SDL_SCANCODE_W)) {
-            return direction.y +=1;
-        }
+        //vec2 direction = { 0,0 };
+        //if (inputsys->getKeyDown(SDL_SCANCODE_W)) {
+        //    return direction.y +=1;
+        //}
 
         //direction.Normalized(); fix line 95 in vector2.h
 
@@ -198,6 +214,12 @@ int main(int argc, char* argv[]) {
             renderer.setColor((uint8_t)random::getrandom() * 255, (uint8_t)random::getrandom() * (uint8_t)random::getrandom() * 255, (uint8_t)0, (uint8_t)255);
 			renderer.drawdot(star.x, star.y); // Draw each star
         }
+
+        
+        
+
+        text->Draw(renderer, 40.0f, 40.0f);
+
 		renderer.present(); // Render the screen
 
 		renderer.clear(); // Clear the renderer

@@ -3,10 +3,17 @@
 #include <iostream>
 #include <string>
 
+namespace parabellum {
+
     bool Renderer::initialize()
     {
         if (!SDL_Init(SDL_INIT_VIDEO)) {
             std::cout << SDL_GetError() << std::endl;
+            return false;
+        }
+
+        if (!TTF_Init()) {
+            std::cerr << "TTF_Init Error: " << SDL_GetError() << std::endl;
             return false;
         }
 
@@ -58,12 +65,13 @@
 
     void Renderer::GTFO()
     {
+        TTF_Quit();
         SDL_DestroyRenderer(renderer);
         SDL_DestroyWindow(current_window);
         SDL_Quit();
     }
 
-   
+
 
     void Renderer::drawline(float x1, float y1, float x2, float y2)
     {
@@ -72,5 +80,6 @@
 
     void Renderer::drawdot(float x, float y)
     {
-		SDL_RenderPoint(renderer, x, y);
+        SDL_RenderPoint(renderer, x, y);
     }
+}
