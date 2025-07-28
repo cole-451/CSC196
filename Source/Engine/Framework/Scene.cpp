@@ -15,10 +15,16 @@ namespace parabellum {
 	}
 	void Scene::AddActor(std::unique_ptr<Actor> actor)
 	{
-
 	}
-	/*void Scene::AddActor(std::unique_ptr<Actor> actor)
-	{
-		//Find out why this is bugged.
-	}*/
+	//Actor* Scene::getActorByName(const std::string& name) {
+		//for (auto& actor : m_actors) {
+			//if(actor->name == name){return	}
+	//} Strange shit going on here. Comments are showing up where they shouldn't be.
+	
+	
+	
+	//void Scene::AddActor(std::unique_ptr<Actor> actor)
+	//{
+	//	Find out why this is bugged.
+	//}
 }

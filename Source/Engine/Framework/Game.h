@@ -18,6 +18,8 @@ namespace parabellum {
 	
 	private:
 		std::unique_ptr<Scene> m_scene;
+		int m_score;
+		int m_lives;
 	};
 
 

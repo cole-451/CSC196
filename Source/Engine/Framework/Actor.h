@@ -11,6 +11,10 @@ namespace parabellum {
 		std::string name;
 		std::string tag;
 
+		vec2 velocity{ 0,0 };
+
+		float damping = 0.2f;
+
 		Actor() = default;
 		Actor(const Transform& transform, class std::shared_ptr<Model> model):
 			m_transform{transform},
@@ -24,7 +28,11 @@ namespace parabellum {
 		Transform& GetTransform() { return m_transform; }
 	protected:
 		Transform m_transform;
+
+		//Scene* scene = nullptr;
 		
 		std::shared_ptr<Model> m_model;
+
+		
 	};
 }

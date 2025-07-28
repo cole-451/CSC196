@@ -2,10 +2,13 @@
 #include "Engine.h"
 #include "Input/InputSystem.h"
 #include "Math/Vector2.h"
+#include "Renderer/Renderer.h"
 
 
 void Player::Update(float dt)
 {
+
+	// make shit for rotation, thrusting and movement shit like that
 	float rotate = 0;
 	float speed = 200;
 	float rotationRate = 0.0f;
@@ -33,5 +36,10 @@ void Player::Update(float dt)
 		direction = direction.Normalized();
 		m_transform.position += (direction * speed) * dt;
 	}
+
+	float thrust = 0;
+	//if(scancodeshit)
+
+	//m_transform.position.x = parabellum::math::Wrap(m_transform.position.x) i cant fucking see dude
 	Actor::Update(dt);
 }

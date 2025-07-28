@@ -1,5 +1,8 @@
 #pragma once
 #include "Framework/Game.h"
+#include "Framework/Scene.h"
+#include <memory>
+
 
 
 class SpaceGame : parabellum::Game {
@@ -17,5 +20,7 @@ private:
 	void GTFO() override;
 
 	void Draw() override;
+
+	std::unique_ptr<parabellum::Scene> m_scene;
 
 };

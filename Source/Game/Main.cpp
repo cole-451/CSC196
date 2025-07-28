@@ -30,14 +30,11 @@ using namespace parabellum;
 int main(int argc, char* argv[]) {
 
     std::unique_ptr<SpaceGame> game = std::make_unique<SpaceGame>();
-	Renderer renderer;
-    //InputSystem inputsys;
+	//Renderer renderer;
 
-    //getEngine().initialize();
+   getEngine().initialize();
 
-    //getEngine().getRenderer().initialize();
 
-   // getEngine().getRenderer().createWindow("parabellum engine", 1280, 1024);
 
     
 
@@ -47,14 +44,18 @@ int main(int argc, char* argv[]) {
 
     SDL_Init(SDL_INIT_VIDEO);
     //TODO: make this also into a unique_ptr and fix all the refrences below
-	renderer.initialize();
+	//renderer.initialize();
+    getEngine().getRenderer().initialize();
 
-    std::unique_ptr<InputSystem> inputsys = std::make_unique<InputSystem>();
-    inputsys->initialize();
+    //std::unique_ptr<InputSystem> inputsys = std::make_unique<InputSystem>();
+    //inputsys->initialize();
+    getEngine().getInputSys().initialize();
 
     // create audio system
-    std::unique_ptr<audiosys> audio = std::make_unique<audiosys>();
-    audio->init();
+    //std::unique_ptr<audiosys> audio = std::make_unique<audiosys>();
+    //audio->init();
+
+    getEngine().getAudioSys().init();
 
 
     Time::Time();
@@ -85,13 +86,14 @@ int main(int argc, char* argv[]) {
     }
 	vec2 v(30, 40);
 
-	renderer.createWindow("SDL3 Project", 1280, 1024);
+	//renderer.createWindow("SDL3 Project", 1280, 1024);
+    getEngine().getRenderer().createWindow("parabellum engine", 1280, 1024);
 
     Font* font = new Font();
     font->Load("Brianne_s_hand.ttf", 20);
 
     Text* text = new Text(font);
-    text->Create(renderer, "Hello World", vec3{ 1, 1, 1 });
+    text->Create(getEngine().getRenderer(), "Hello World", vec3{ 1, 1, 1 });
    
 
     SDL_Event e;
@@ -117,7 +119,7 @@ int main(int argc, char* argv[]) {
     //audio->playSound(sound, 0, false, nullptr);
 
 
-    if (inputsys->getKeyDown(SDL_SCANCODE_A)) {
+    if (getEngine().getInputSys().getKeyDown(SDL_SCANCODE_A)) {
     }
     // maybe make a controller?
 
@@ -130,33 +132,35 @@ int main(int argc, char* argv[]) {
         }
 
         //update
-        inputsys->Update();
-        audio->update();
 
-        vec2 mouse = inputsys->getMousePos();
 
-        std::cout << inputsys->getMousePos().x << ","<< inputsys->getMousePos().y<<std::endl;
+        getEngine().getInputSys().Update();
+        getEngine().getAudioSys().update();
 
-        if (inputsys->GetMouseButtonPressed(parabellum::InputSystem::MouseButton::MOUSE_LEFT)) {
-            points.push_back(inputsys->getMousePos());
+        vec2 mouse = getEngine().getInputSys().getMousePos();
+
+        std::cout << getEngine().getInputSys().getMousePos().x << ","<< getEngine().getInputSys().getMousePos().y<<std::endl;
+
+        if (getEngine().getInputSys().GetMouseButtonPressed(parabellum::InputSystem::MouseButton::MOUSE_LEFT)) {
+            points.push_back(getEngine().getInputSys().getMousePos());
         }
         for (int i = 0; i < (int)points.size() - 1; i++) {
             // set color or random color
-            renderer.drawline(points[i].x, points[i].y, points[i + 1].x, points[i + 1].y);
+            getEngine().getRenderer().drawline(points[i].x, points[i].y, points[i + 1].x, points[i + 1].y);//switch
         }
 
         for (int i = 0; i < (int)points.size() - 1; i++) {
             // set color or random color
-            renderer.drawline(points[i].x, points[i].y, points[i + 1].x, points[i + 1].y);
+            getEngine().getRenderer().drawline(points[i].x, points[i].y, points[i + 1].x, points[i + 1].y); //switch
         }
 
 
-        if (inputsys->getKeyDown(SDL_SCANCODE_A)) {
+        if (getEngine().getInputSys().getKeyDown(SDL_SCANCODE_A)) {
             //tf.rotation += 1; //* time.getDeltaTime;
 
         }
 
-        if (inputsys->getKeyDown(SDL_SCANCODE_Q) && !inputsys->getPrevKeyDown(SDL_SCANCODE_Q))
+        if (getEngine().getInputSys().getKeyDown(SDL_SCANCODE_Q) && !getEngine().getInputSys().getPrevKeyDown(SDL_SCANCODE_Q))
     
     {
         // play bass sound, vector elements can be accessed like an array with [#]
@@ -165,18 +169,18 @@ int main(int argc, char* argv[]) {
 
     }
 
-        if (inputsys->getKeyDown(SDL_SCANCODE_W) && !inputsys->getPrevKeyDown(SDL_SCANCODE_W)) {
+        if (getEngine().getInputSys().getKeyDown(SDL_SCANCODE_W) && getEngine().getInputSys().getPrevKeyDown(SDL_SCANCODE_W)) {
             sound = sounds[1];
-            //audio->playSound(sound, 0, false, nullptr);
+            //getEngine().getAudioSys().playSound(sound, 0, false, nullptr);
         }
-        if (inputsys->getKeyDown(SDL_SCANCODE_E) && !inputsys->getPrevKeyDown(SDL_SCANCODE_E)) {
+        if (getEngine().getInputSys().getKeyDown(SDL_SCANCODE_E) && getEngine().getInputSys().getPrevKeyDown(SDL_SCANCODE_E)) {
             sound = sounds[2];
-            //audio->playSound(sound, 0, false, nullptr);
+            //getEngine().getAudioSys().playSound(sound, 0, false, nullptr);
         }
 
 
-        if (inputsys->GetMouseButtonDown(parabellum::InputSystem::MouseButton::MOUSE_LEFT)) {
-            vec2 position = inputsys->getMousePos();
+        if (getEngine().getInputSys().GetMouseButtonDown(parabellum::InputSystem::MouseButton::MOUSE_LEFT)) {
+            vec2 position = getEngine().getInputSys().getMousePos();
             if (points.size() == 0) { 
                 points.push_back(position); 
             }
@@ -185,12 +189,6 @@ int main(int argc, char* argv[]) {
             }
         }
 
-        //vec2 direction = { 0,0 };
-        //if (inputsys->getKeyDown(SDL_SCANCODE_W)) {
-        //    return direction.y +=1;
-        //}
-
-        //direction.Normalized(); fix line 95 in vector2.h
 
 
         
@@ -201,7 +199,7 @@ int main(int argc, char* argv[]) {
 
         vec3 color{ 0,0,1 };
 
-        renderer.setColor(color.r, color.g, color.b);
+        getEngine().getRenderer().setColor(color.r, color.g, color.b); //switch
         //model->Draw(renderer, inputsys->getMousePos(),0.0f, 50.0f); // once its a pointer, this.that turns to this->that
 
         //drawing
@@ -210,25 +208,26 @@ int main(int argc, char* argv[]) {
             if (star[0] > 1280 || star[1] > 1024) {
                 star.x = 0;
             }
-            renderer.setColor((uint8_t)random::getrandom() * 255, (uint8_t)random::getrandom() * (uint8_t)random::getrandom() * 255, (uint8_t)0, (uint8_t)255);
-			renderer.drawdot(star.x, star.y); // Draw each star
-        }
+            getEngine().getRenderer().setColor((uint8_t)random::getrandom() * 255, (uint8_t)random::getrandom() * (uint8_t)random::getrandom() * 255, (uint8_t)0, (uint8_t)255);
+            getEngine().getRenderer().drawdot(star.x, star.y); // Draw each star
+        } // anything with "renderer" and "audio", please update
 
         
         
 
-        text->Draw(renderer, 40.0f, 40.0f);
+        text->Draw(getEngine().getRenderer(), 40.0f, 40.0f);
 
-		renderer.present(); // Render the screen
+        getEngine().getRenderer().present(); // Render the screen
 
-		renderer.clear(); // Clear the renderer
+        getEngine().getRenderer().clear(); // Clear the renderer
 
        
 
     }
 
 
-    renderer.GTFO();
+    getEngine().getRenderer().GTFO();
+    getEngine().GTFO();
     
     return 0;
 }

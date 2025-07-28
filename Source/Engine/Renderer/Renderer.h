@@ -39,7 +39,7 @@ namespace parabellum {
 		friend class Text;
 
 		SDL_Window* current_window = nullptr;
-		SDL_Renderer* renderer;
+		SDL_Renderer* renderer = 0;
 
 		int w_width{ 0 };
 		int w_height{ 0 };

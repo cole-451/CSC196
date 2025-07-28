@@ -26,6 +26,22 @@ namespace parabellum::math {
 			return degrees = (pi / 180);
 		}
 
+		constexpr int Wrap(int value, int min, int max) {
+			int range = max - min;
+			int result = (value - min) % range;
+			if (result < 0) result += range;
+
+			return min + result;
+		}
+
+		/*constexpr float Wrap(float value, float min, float max) {
+			float range = max - min;
+			float result = (value - min) % range;
+			if (result < 0) result += range;
+
+			return min + result;
+		}*/
+
 		using std::min;
 		using std::max;
 		using std::sqrt;

@@ -97,7 +97,7 @@ struct Vector2
 
 
 	//returns angle in radians between the positive x axis and the point x,y
-	float Angle() const { return parabellum::math::atan2(y, x); }
+	float Angle() const { return parabellum::math::atan2f(y, x); }
 
 	Vector2 Rotate(float radians) const {
 		Vector2 v;

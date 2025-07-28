@@ -14,6 +14,8 @@ namespace parabellum {
 
 		void AddActor(std::unique_ptr<Actor> actor);
 
+		Actor* getActorByName(const std::string& name);
+
 
 	private:
 		std::vector<std::unique_ptr<class Actor>> actors;
