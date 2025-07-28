@@ -25,23 +25,22 @@
 #include <fmod.hpp>
 #include <memory>
 
+
 using namespace parabellum;
 
 int main(int argc, char* argv[]) {
 
+   
+   
+    // you can dynamic cast similar objects into another. Maybe we can use this to turn enemies into players?
+    
+
     std::unique_ptr<SpaceGame> game = std::make_unique<SpaceGame>();
 	//Renderer renderer;
 
-   getEngine().initialize();
-
-
-
-    
-
-
     //inits.
-
-
+  
+    getEngine().initialize();
     SDL_Init(SDL_INIT_VIDEO);
     //TODO: make this also into a unique_ptr and fix all the refrences below
 	//renderer.initialize();
@@ -70,7 +69,7 @@ int main(int argc, char* argv[]) {
 
     //create the player
 
-    Player player;
+    
 
     void* extradriverdata = nullptr;
 
@@ -87,7 +86,7 @@ int main(int argc, char* argv[]) {
 	vec2 v(30, 40);
 
 	//renderer.createWindow("SDL3 Project", 1280, 1024);
-    getEngine().getRenderer().createWindow("parabellum engine", 1280, 1024);
+   // getEngine().getRenderer().createWindow("parabellum engine", 1280, 1024);
 
     Font* font = new Font();
     font->Load("Brianne_s_hand.ttf", 20);
@@ -132,15 +131,14 @@ int main(int argc, char* argv[]) {
         }
 
         //update
-
-
         getEngine().getInputSys().Update();
         getEngine().getAudioSys().update();
 
         vec2 mouse = getEngine().getInputSys().getMousePos();
 
-        std::cout << getEngine().getInputSys().getMousePos().x << ","<< getEngine().getInputSys().getMousePos().y<<std::endl;
-
+        
+        //std::cout << getEngine().getInputSys().getMousePos().x << ","<< getEngine().getInputSys().getMousePos().y<<std::endl;
+//paint shit
         if (getEngine().getInputSys().GetMouseButtonPressed(parabellum::InputSystem::MouseButton::MOUSE_LEFT)) {
             points.push_back(getEngine().getInputSys().getMousePos());
         }
@@ -204,13 +202,13 @@ int main(int argc, char* argv[]) {
 
         //drawing
         for (auto& star : stars) {
-			star += speed; // Move each star by speed
+            star += speed; // Move each star by speed
             if (star[0] > 1280 || star[1] > 1024) {
                 star.x = 0;
             }
             getEngine().getRenderer().setColor((uint8_t)random::getrandom() * 255, (uint8_t)random::getrandom() * (uint8_t)random::getrandom() * 255, (uint8_t)0, (uint8_t)255);
             getEngine().getRenderer().drawdot(star.x, star.y); // Draw each star
-        } // anything with "renderer" and "audio", please update
+        }
 
         
         
@@ -226,7 +224,8 @@ int main(int argc, char* argv[]) {
     }
 
 
-    getEngine().getRenderer().GTFO();
+    //getEngine().getRenderer().GTFO();
+    
     getEngine().GTFO();
     
     return 0;

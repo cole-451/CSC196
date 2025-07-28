@@ -39,6 +39,8 @@ bool SpaceGame::initialize()
     std::unique_ptr<Player> player = std::make_unique<Player>(tf, model);
     actors.push_back(std::move(player));
 
+    
+
     /*
     for (int i = 0; i < 10; i++) {
         Transform tf(vec2{ random::getrandomfloat(), random::getrandomfloat() }, 0.0f, 1.0f);
@@ -59,7 +61,22 @@ void SpaceGame::Update()
     for (int i = 0; i < 10; i++) {
         Transform transform{ vec2{ parabellum::random::getrandomfloat() * 1280, parabellum::random::getrandomfloat() * 1024 }, 0, 10 };
         //std::unique_ptr<Enemy> enemy = std::make_unique<Enemy>(transform, model);
-        //scene.AddActor(std::move(enemy)); God, why must this class be so frantic to follow?
+        //scene.AddActor(std::move(enemy)); Fix this up, go watch the tutorial videos later
+    }
+
+    switch (current_state) {
+    case GameState::Initialize:
+        //FUCK, Jimmy! Can't you see we're trying to have a FUCKIN Dick!
+        current_state = GameState::Title;
+        break;
+
+    case GameState::Title:
+        //I am NOT gay! I knew it was 1216, one after Magna Carta, as if I would ever, EVER suck a cock!
+        //if space bar{
+        // current_state = GameState::StartGame
+        //}
+        break;
+
     }
 }
 

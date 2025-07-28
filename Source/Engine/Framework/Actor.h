@@ -3,6 +3,8 @@
 #include "../Renderer/Model.h"
 #include <string>
 #include <memory>
+#include "../Core/StringHelper.h"
+
 
 namespace parabellum {
 	class Actor {
@@ -13,7 +15,10 @@ namespace parabellum {
 
 		vec2 velocity{ 0,0 };
 
-		float damping = 0.2f;
+		float damping{ 0.0f };
+
+		Transform transform;
+
 
 		Actor() = default;
 		Actor(const Transform& transform, class std::shared_ptr<Model> model):

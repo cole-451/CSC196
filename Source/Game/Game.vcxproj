@@ -164,6 +164,7 @@ fmod_vc.lib;sdl3_ttf.lib;%(AdditionalDependencies)</AdditionalDependencies>
   </ItemDefinitionGroup>
   <ItemGroup>
     <ClCompile Include="Enemy.cpp" />
+    <ClCompile Include="GameData.cpp" />
     <ClCompile Include="Main.cpp" />
     <ClCompile Include="Player.cpp" />
     <ClCompile Include="SpaceGame.cpp" />
@@ -175,6 +176,7 @@ fmod_vc.lib;sdl3_ttf.lib;%(AdditionalDependencies)</AdditionalDependencies>
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="Enemy.h" />
+    <ClInclude Include="GameData.h" />
     <ClInclude Include="Player.h" />
     <ClInclude Include="SpaceGame.h" />
   </ItemGroup>

@@ -10,7 +10,7 @@ namespace parabellum {
 bool Engine::initialize() {
 	m_renderer = std::make_unique<Renderer>();
 	m_renderer->initialize();
-	m_renderer->createWindow("SDL3 Project", 1280, 1024);
+	m_renderer->createWindow("parabellum engine", 1280, 1024);
 
 	m_inputsys = std::make_unique<InputSystem>();
 	m_inputsys->initialize();

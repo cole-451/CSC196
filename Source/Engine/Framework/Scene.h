@@ -2,6 +2,7 @@
 #include <vector>
 #include <memory> 
 #include "Actor.h"
+#include "../Core/StringHelper.h"
 
 namespace parabellum {
 	class Scene {
@@ -15,6 +16,13 @@ namespace parabellum {
 		void AddActor(std::unique_ptr<Actor> actor);
 
 		Actor* getActorByName(const std::string& name);
+
+		template <typename T>
+
+		std::vector<T> getActorsByTag(const std::string& tag);
+
+		template<typename T = Actor>
+		T* GetActorByName(const std::string& name);
 
 
 	private:

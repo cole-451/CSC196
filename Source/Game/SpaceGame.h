@@ -7,6 +7,14 @@
 
 class SpaceGame : parabellum::Game {
 public:
+	enum class GameState {
+		Initialize,
+		Title,
+		StartGame,
+		ComeGetSome, // game state
+		HesRottingYouKnow, //death
+		YouFuckingSuck, // gameover
+	};
 	SpaceGame() = default;
 
 private:
@@ -22,5 +30,7 @@ private:
 	void Draw() override;
 
 	std::unique_ptr<parabellum::Scene> m_scene;
+
+	GameState current_state;
 
 };

@@ -12,6 +12,7 @@ void Enemy::Update(float dt)
 
 	//if (player) {
 		//direction = player->m_transform.position - m_transform.position;
+		// 
 	//}
 
 	//transform.rotation = parabellum::math::radToDeg(direction.Angle());
