@@ -10,6 +10,7 @@
 #include "Engine.h"
 #include "Renderer/Renderer.h"
 #include "Renderer/Font.h"
+#include "GameData.h"
 
 using namespace parabellum;
 bool SpaceGame::initialize() 
@@ -70,9 +71,10 @@ bool SpaceGame::initialize()
 void SpaceGame::Update()
 {
     for (int i = 0; i < 10; i++) {
-        Transform transform{ vec2{ parabellum::random::getrandomfloat() * 1280, parabellum::random::getrandomfloat() * 1024 }, 0, 10 };
-        //std::unique_ptr<Enemy> enemy = std::make_unique<Enemy>(transform, model);
-        //scene.AddActor(std::move(enemy)); Fix this up, go watch the tutorial videos later
+        Transform transform{ vec2{ parabellum::random::getReal() * 1280, parabellum::random::getReal() * 1024 }, 0, 10 };
+        std::shared_ptr<Model> model = std::make_shared<Model>(GameData::enemyPoints, vec3{ 1.0f, 0.0f, 0.0f });
+        std::unique_ptr<Enemy> enemy = std::make_unique<Enemy>(transform, model);
+        m_scene->AddActor(std::move(enemy));
     }
 
     switch (current_state) {

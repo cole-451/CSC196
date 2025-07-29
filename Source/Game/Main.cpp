@@ -85,7 +85,7 @@ int main(int argc, char* argv[]) {
     std::vector<FMOD::Sound*> sounds;
 
     for (int i = 0; i < 100; i++) {
-        stars.push_back(vec2{random::getrandomfloat() * 1280.0f, random::getrandomfloat() * 1024.0f});
+        stars.push_back(vec2{random::getReal() * 1280.0f, random::getReal() * 1024.0f});
     }
 	vec2 v(30, 40);
 
@@ -188,7 +188,7 @@ int main(int argc, char* argv[]) {
             if (star[0] > 1280 || star[1] > 1024) {
                 star.x = 0;
             }
-            getEngine().getRenderer().setColor((uint8_t)random::getrandom() * 255, (uint8_t)random::getrandom() * (uint8_t)random::getrandom() * 255, (uint8_t)0, (uint8_t)255);
+            getEngine().getRenderer().setColor((uint8_t)random::getInt() * 255, (uint8_t)random::getInt() * (uint8_t)random::getInt() * 255, (uint8_t)0, (uint8_t)255);
             getEngine().getRenderer().drawdot(star.x, star.y); // Draw each star
         }
 
