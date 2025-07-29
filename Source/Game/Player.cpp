@@ -5,6 +5,7 @@
 #include "Renderer/Renderer.h"
 
 
+
 void Player::Update(float dt)
 {
 
@@ -12,34 +13,70 @@ void Player::Update(float dt)
 	float rotate = 0;
 	float speed = 200;
 	float rotationRate = 0.0f;
-	
-	vec2 direction{ 0,0 };
-	if (parabellum::getEngine().getInputSys().getKeyDown(SDL_SCANCODE_W)) {
-		direction.y = -1;
-	}
-	if (parabellum::getEngine().getInputSys().getKeyDown(SDL_SCANCODE_S)) {
-		direction.y = 1;
-	}
+	float thrust = 0;
+
+	//rotate
+
 	if (parabellum::getEngine().getInputSys().getKeyDown(SDL_SCANCODE_A)) {
-		direction.x = -1;
+		rotate += -1;
 	}
 	if (parabellum::getEngine().getInputSys().getKeyDown(SDL_SCANCODE_D)) {
-		direction.x = 1;
+		rotate += 1;
 	}
-
 	m_transform.rotation *= (rotate * rotationRate) * dt;
 
-	//TODO: find what you need to include
+	//thrust
+	if (parabellum::getEngine().getInputSys().getKeyDown(SDL_SCANCODE_W)) thrust = 1;
+	if (parabellum::getEngine().getInputSys().getKeyDown(SDL_SCANCODE_S)) thrust = -1;
 
+	
+
+
+
+
+	
+	vec2 direction{ 1,0 };
+	vec2 force = direction.Rotate(m_transform.rotation) * speed;
+
+	/*
+	
+	if (parabellum::getEngine().getInputSys().getKeyDown(SDL_SCANCODE_W)) {
+		direction.y += -1;
+	}
+	if (parabellum::getEngine().getInputSys().getKeyDown(SDL_SCANCODE_S)) {
+		direction.y += 1;
+	}
+	if (parabellum::getEngine().getInputSys().getKeyDown(SDL_SCANCODE_A)) {
+		direction.x += -1;
+	}
+	if (parabellum::getEngine().getInputSys().getKeyDown(SDL_SCANCODE_D)) {
+		direction.x += 1;
+	} // pressing anything gets you "vector subscript out of range"
 
 	if (direction.lengthSqr() > 0) {
 		direction = direction.Normalized();
 		m_transform.position += (direction * speed) * dt;
 	}
+	*/
 
-	float thrust = 0;
-	//if(scancodeshit)
+
+	//TODO: find what you need to include
+
+
+
+	//check button to fire bullet!
+
+	//ADDITIONAL: later, we can make some homing rockets or a ray that can make enemies join us
+
+
 
 	//m_transform.position.x = parabellum::math::Wrap(m_transform.position.x) i cant fucking see dude
 	Actor::Update(dt);
+}
+
+void Player::onCollision(Actor* other)
+{
+	if (tag != other->tag) {
+		stillAlive = false;
+	}
 }

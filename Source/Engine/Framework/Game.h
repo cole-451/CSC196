@@ -14,9 +14,19 @@ namespace parabellum {
 		virtual void Update() = 0;
 		virtual void GTFO() = 0;
 		virtual void Draw() = 0;
-	
+		
+		void addPoints(int points) {
+			m_score += points;
+		}
+
+		int getPoints() { return m_score; }
+
+		int getLives() { return m_lives; }
+
+		void setLives(int lives) { m_lives = lives; }
 	
 	private:
+		//list of what needs to be made?
 		std::unique_ptr<Scene> m_scene;
 		int m_score;
 		int m_lives;

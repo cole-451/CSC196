@@ -17,3 +17,12 @@ void Enemy::Update(float dt)
 
 	//transform.rotation = parabellum::math::radToDeg(direction.Angle());
 }
+
+void Enemy::onCollision(Actor* other)
+{
+	if (tag != other->tag) {
+		stillAlive = false;
+		//scene->getGame()->addPoints(100);
+
+	}
+}

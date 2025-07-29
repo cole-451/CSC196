@@ -8,9 +8,11 @@
 #include <memory>
 #include "Framework/Scene.h"
 #include "Engine.h"
+#include "Renderer/Renderer.h"
+#include "Renderer/Font.h"
 
 using namespace parabellum;
-bool SpaceGame::initialize()
+bool SpaceGame::initialize() 
 {
 
     m_scene = std::make_unique<Scene>();
@@ -32,12 +34,22 @@ bool SpaceGame::initialize()
     Transform tf(vec2{ 500,500 }, 0.0f, 1.0f);
 
 
-    //declare and create actor
+    //declare and create actor list
     std::vector<std::unique_ptr<Actor>> actors;
 
-    Actor actor1(tf, model);
+   // Actor actor1(tf, model);
+
+    //make player
     std::unique_ptr<Player> player = std::make_unique<Player>(tf, model);
-    actors.push_back(std::move(player));
+    player->name = "Player";
+    player->tag = "player";
+    //actors.push_back(std::move(player));
+
+    m_scene->AddActor(std::move(player));
+
+
+
+    
 
     
 
@@ -71,6 +83,7 @@ void SpaceGame::Update()
         break;
 
     case GameState::Title:
+        
         //I am NOT gay! I knew it was 1216, one after Magna Carta, as if I would ever, EVER suck a cock!
         //if space bar{
         // current_state = GameState::StartGame

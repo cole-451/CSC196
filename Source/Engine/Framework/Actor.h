@@ -19,6 +19,9 @@ namespace parabellum {
 
 		Transform transform;
 
+		bool stillAlive = true;
+
+		float lifespan = 0;
 
 		Actor() = default;
 		Actor(const Transform& transform, class std::shared_ptr<Model> model):
@@ -31,6 +34,10 @@ namespace parabellum {
 		virtual void Draw(class Renderer& renderer);
 
 		Transform& GetTransform() { return m_transform; }
+
+		virtual void onCollision(Actor* other) = 0;
+
+		float getRadius();
 	protected:
 		Transform m_transform;
 

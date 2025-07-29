@@ -3,6 +3,7 @@
 #include <memory> 
 #include "Actor.h"
 #include "../Core/StringHelper.h"
+#include <list>
 
 namespace parabellum {
 	class Scene {
@@ -26,7 +27,8 @@ namespace parabellum {
 
 
 	private:
-		std::vector<std::unique_ptr<class Actor>> actors;
+		
+		std::list<std::unique_ptr<class Actor>> actors;
 
 	};
 }

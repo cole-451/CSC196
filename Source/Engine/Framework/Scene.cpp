@@ -8,7 +8,19 @@
 
 namespace parabellum {
 	void Scene::Update(float dt) {
-
+		for (auto& actor : actors) {
+			actor->Update(dt);
+		}
+		
+		//remove destroyed actors
+		for (auto iter = actors.begin(); iter != actors.end();) {
+			if (!(*iter)->stillAlive) {
+				actors.erase(iter);
+			}
+			else {
+				iter++;
+			}
+		}
 	}
 
 	void Scene::Draw(class Renderer& renderer) {
@@ -18,7 +30,10 @@ namespace parabellum {
 	}
 	void Scene::AddActor(std::unique_ptr<Actor> actor)
 	{
+
 	}
+
+
 	Actor* Scene::getActorByName(const std::string& name) {
 		//for (auto& actor : m_actors) {
 			//if(actor->name == name){return	}
@@ -54,6 +69,18 @@ namespace parabellum {
 			}
 		}
 		return results;
+
+	// check for collisions
+	for (auto& actorB : actors) {
+		for (auto& actorA : actors) {
+			//if one is destroyed, dont do anything
+			float distance = actorA->transformation.position - actorB->transformation.position.length();
+			if (distance <= actorA->getRadius() * ActorB->getRadius()) {
+				actorA->onCollision(actorB.get());
+				actorB->onCollision(actorA.get());
+			}
+		}
+	}
 	}
 
 	
@@ -65,4 +92,6 @@ namespace parabellum {
 	//{
 	//	Find out why this is bugged.
 	//}
+
+
 }

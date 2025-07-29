@@ -57,14 +57,18 @@ int main(int argc, char* argv[]) {
     getEngine().getAudioSys().init();
 
 
-    Time::Time();
+    Time time;
 
     Scene scene1;
 
 
-    //create model
-    SpaceGame spacegame;
+    //create vidya game
+    std::unique_ptr<SpaceGame> spacegame = std::make_unique<SpaceGame>();
     
+     spacegame->initialize(); 
+
+
+    //Transform transform;
 
 
     //create the player
@@ -118,12 +122,13 @@ int main(int argc, char* argv[]) {
     //audio->playSound(sound, 0, false, nullptr);
 
 
-    if (getEngine().getInputSys().getKeyDown(SDL_SCANCODE_A)) {
-    }
+   
+
     // maybe make a controller?
 
     //MAIN LOOP
     while (!quit) {
+        time.Tick();
         while (SDL_PollEvent(&e)) {
             if (e.type == SDL_EVENT_QUIT) {
                 quit = true;
@@ -153,28 +158,8 @@ int main(int argc, char* argv[]) {
         }
 
 
-        if (getEngine().getInputSys().getKeyDown(SDL_SCANCODE_A)) {
-            //tf.rotation += 1; //* time.getDeltaTime;
 
-        }
 
-        if (getEngine().getInputSys().getKeyDown(SDL_SCANCODE_Q) && !getEngine().getInputSys().getPrevKeyDown(SDL_SCANCODE_Q))
-    
-    {
-        // play bass sound, vector elements can be accessed like an array with [#]
-            sound = sounds[0];
-            //audio->playSound(sound, 0, false, nullptr);
-
-    }
-
-        if (getEngine().getInputSys().getKeyDown(SDL_SCANCODE_W) && getEngine().getInputSys().getPrevKeyDown(SDL_SCANCODE_W)) {
-            sound = sounds[1];
-            //getEngine().getAudioSys().playSound(sound, 0, false, nullptr);
-        }
-        if (getEngine().getInputSys().getKeyDown(SDL_SCANCODE_E) && getEngine().getInputSys().getPrevKeyDown(SDL_SCANCODE_E)) {
-            sound = sounds[2];
-            //getEngine().getAudioSys().playSound(sound, 0, false, nullptr);
-        }
 
 
         if (getEngine().getInputSys().GetMouseButtonDown(parabellum::InputSystem::MouseButton::MOUSE_LEFT)) {
@@ -196,9 +181,9 @@ int main(int argc, char* argv[]) {
 		float length = speed.length();
 
         vec3 color{ 0,0,1 };
-
+        spacegame->initialize();
         getEngine().getRenderer().setColor(color.r, color.g, color.b); //switch
-        //model->Draw(renderer, inputsys->getMousePos(),0.0f, 50.0f); // once its a pointer, this.that turns to this->that
+        //scene1.Draw(getEngine().getRenderer());
 
         //drawing
         for (auto& star : stars) {

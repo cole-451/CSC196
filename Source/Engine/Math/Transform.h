@@ -7,7 +7,7 @@ struct Transform {
 	float scale;
 
 	Transform() = default;
-	Transform(const vec2& position, float rotation, float scale = 1):
+	Transform(const vec2& position, float rotation = 0, float scale = 1):
 		position{position}, // another way of this.position = position
 		rotation{rotation},
 		scale{scale}

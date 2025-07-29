@@ -1,6 +1,8 @@
 #pragma once
 #include "Framework/Game.h"
 #include "Framework/Scene.h"
+#include "Renderer/Font.h"
+#include "Renderer/Text.h"
 #include <memory>
 
 
@@ -17,10 +19,6 @@ public:
 	};
 	SpaceGame() = default;
 
-private:
-
-
-	// Inherited via Game
 	bool initialize() override;
 
 	void Update() override;
@@ -28,9 +26,23 @@ private:
 	void GTFO() override;
 
 	void Draw() override;
+private:
+
+
+	// Inherited via Game
 
 	std::unique_ptr<parabellum::Scene> m_scene;
 
 	GameState current_state;
+
+	float enemySpawnTimer = 0;
+
+	std::shared_ptr<Font*> m_titleFont;
+
+	std::shared_ptr<Font*> m_scoreFont;
+
+	std::unique_ptr<Text*> titleText;
+
+	std::unique_ptr<Text*> scoreText;
 
 };

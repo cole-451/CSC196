@@ -13,7 +13,12 @@ public:
 	}
 
 
+
 	void Update(float dt) override;
 private:
+
+
+	// Inherited via Actor
+	void onCollision(Actor* other) override;
 
 };
