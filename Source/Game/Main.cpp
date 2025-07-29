@@ -89,14 +89,12 @@ int main(int argc, char* argv[]) {
     }
 	vec2 v(30, 40);
 
-	//renderer.createWindow("SDL3 Project", 1280, 1024);
-   // getEngine().getRenderer().createWindow("parabellum engine", 1280, 1024);
 
-    Font* font = new Font();
-    font->Load("Brianne_s_hand.ttf", 20);
+    //Font* font = new Font();
+    //font->Load("Brianne_s_hand.ttf", 20);
 
-    Text* text = new Text(font);
-    text->Create(getEngine().getRenderer(), "Hello World", vec3{ 1, 1, 1 });
+    //std::shared_ptr<Text> text =  std::make_shared<Text>(font);
+    //text->Create(getEngine().getRenderer(), "Hello World", vec3{ 1, 1, 1 });
    
 
     SDL_Event e;
@@ -138,31 +136,31 @@ int main(int argc, char* argv[]) {
         //update
         getEngine().getInputSys().Update();
         getEngine().getAudioSys().update();
+        
 
         vec2 mouse = getEngine().getInputSys().getMousePos();
 
         
         //std::cout << getEngine().getInputSys().getMousePos().x << ","<< getEngine().getInputSys().getMousePos().y<<std::endl;
-//paint shit
-        if (getEngine().getInputSys().GetMouseButtonPressed(parabellum::InputSystem::MouseButton::MOUSE_LEFT)) {
-            points.push_back(getEngine().getInputSys().getMousePos());
-        }
-        for (int i = 0; i < (int)points.size() - 1; i++) {
-            // set color or random color
-            getEngine().getRenderer().drawline(points[i].x, points[i].y, points[i + 1].x, points[i + 1].y);//switch
-        }
+        //if (getEngine().getInputSys().GetMouseButtonPressed(parabellum::InputSystem::MouseButton::MOUSE_LEFT)) {
+        //    points.push_back(getEngine().getInputSys().getMousePos());
+        //}
+        //for (int i = 0; i < (int)points.size() - 1; i++) {
+        //    // set color or random color
+        //    getEngine().getRenderer().drawline(points[i].x, points[i].y, points[i + 1].x, points[i + 1].y);//switch
+        //}
 
-        for (int i = 0; i < (int)points.size() - 1; i++) {
-            // set color or random color
-            getEngine().getRenderer().drawline(points[i].x, points[i].y, points[i + 1].x, points[i + 1].y); //switch
-        }
-
+        //for (int i = 0; i < (int)points.size() - 1; i++) {
+        //    // set color or random color
+        //    getEngine().getRenderer().drawline(points[i].x, points[i].y, points[i + 1].x, points[i + 1].y); //switch
+        //}
 
 
 
 
 
-        if (getEngine().getInputSys().GetMouseButtonDown(parabellum::InputSystem::MouseButton::MOUSE_LEFT)) {
+
+       /* if (getEngine().getInputSys().GetMouseButtonDown(parabellum::InputSystem::MouseButton::MOUSE_LEFT)) {
             vec2 position = getEngine().getInputSys().getMousePos();
             if (points.size() == 0) { 
                 points.push_back(position); 
@@ -170,7 +168,7 @@ int main(int argc, char* argv[]) {
             else if ((position - points.back()).length() > 10) { 
                 points.push_back(position); 
             }
-        }
+        }*/
 
 
 
@@ -183,7 +181,6 @@ int main(int argc, char* argv[]) {
         vec3 color{ 0,0,1 };
         spacegame->initialize();
         getEngine().getRenderer().setColor(color.r, color.g, color.b); //switch
-        //scene1.Draw(getEngine().getRenderer());
 
         //drawing
         for (auto& star : stars) {
@@ -198,14 +195,15 @@ int main(int argc, char* argv[]) {
         
         
 
-        text->Draw(getEngine().getRenderer(), 40.0f, 40.0f);
+        //text->Draw(getEngine().getRenderer(), 40.0f, 40.0f);
+
+
+        getEngine().getRenderer().setColor((uint8_t) 25, (uint8_t)25, (uint8_t)25);
+        getEngine().getRenderer().clear(); // make the background black
+       
+        spacegame->Draw();
 
         getEngine().getRenderer().present(); // Render the screen
-
-        getEngine().getRenderer().clear(); // Clear the renderer
-
-       
-
     }
 
 

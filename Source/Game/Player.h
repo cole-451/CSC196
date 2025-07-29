@@ -12,6 +12,8 @@ public:
 	{
 	}
 
+	//void Draw(Renderer& renderer) override;
+
 
 
 	void Update(float dt) override;

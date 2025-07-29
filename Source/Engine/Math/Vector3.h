@@ -6,7 +6,7 @@
 template<typename T>
 struct Vector3
 {
-	T x, y;
+	
 	Vector3() = default;
 	union {
 	struct { T x, y, z; };
@@ -86,12 +86,12 @@ struct Vector3
 		return Vector3{ x *= s, y *= s, z *= s };
 	}
 	Vector3 operator /= (float s) const {
-		return Vector3{ x /= s, y /= s, y/= s };
+		return Vector3{ x /= s, y /= s, z/= s };
 	}
 
 
 	float length() {
-		return sqrt(x * x + y * y + z * z);
+		return sqrt((x * x) + (y * y) + (z * z));
 	}
 	float lengthSqr() {
 		return (x * x) + (y * y) + (z * z);

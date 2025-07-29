@@ -30,6 +30,7 @@ namespace parabellum {
 	}
 	void Scene::AddActor(std::unique_ptr<Actor> actor)
 	{
+		actors.push_back(std::move(actor));
 
 	}
 
@@ -74,8 +75,8 @@ namespace parabellum {
 	for (auto& actorB : actors) {
 		for (auto& actorA : actors) {
 			//if one is destroyed, dont do anything
-			float distance = actorA->transformation.position - actorB->transformation.position.length();
-			if (distance <= actorA->getRadius() * ActorB->getRadius()) {
+			float distance = actorA->m_transform.position - actorB->m_transform.position.length();
+			if (distance <= actorA->getRadius() * actorB->getRadius()) {
 				actorA->onCollision(actorB.get());
 				actorB->onCollision(actorA.get());
 			}

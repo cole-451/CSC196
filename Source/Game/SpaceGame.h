@@ -6,6 +6,7 @@
 #include <memory>
 
 
+namespace parabellum{
 
 class SpaceGame : parabellum::Game {
 public:
@@ -37,12 +38,13 @@ private:
 
 	float enemySpawnTimer = 0;
 
-	std::shared_ptr<Font*> m_titleFont;
+	std::shared_ptr<Font> m_titleFont;
 
-	std::shared_ptr<Font*> m_scoreFont;
+	std::shared_ptr<Font> m_scoreFont;
 
-	std::unique_ptr<Text*> titleText;
+	std::unique_ptr<Text> titleText;
 
-	std::unique_ptr<Text*> scoreText;
+	std::unique_ptr<Text> scoreText;
 
 };
+}

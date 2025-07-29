@@ -18,7 +18,7 @@ namespace parabellum {
 		}
 
 		// create a texture from the surface, only textures can render to the renderer
-		m_texture = SDL_CreateTextureFromSurface(renderer.renderer, surface);
+		m_texture = (SDL_CreateTextureFromSurface(renderer.renderer, surface));
 		if (m_texture == nullptr) {
 			SDL_DestroySurface(surface);
 			std::cerr << "Could not create texture" << SDL_GetError() << std::endl;

@@ -31,7 +31,7 @@ bool SpaceGame::initialize()
     std::shared_ptr<Model> model = std::make_shared<Model>(model_points, vec3{ 1.0f, 0.5f, 0.0f });
 
 
-    Transform tf(vec2{ 500,500 }, 0.0f, 1.0f);
+    Transform tf(vec2{ 500,500 }, 0.0f, 5.0f);
 
 
     //declare and create actor list
@@ -43,8 +43,7 @@ bool SpaceGame::initialize()
     std::unique_ptr<Player> player = std::make_unique<Player>(tf, model);
     player->name = "Player";
     player->tag = "player";
-    //actors.push_back(std::move(player));
-
+    
     m_scene->AddActor(std::move(player));
 
 
@@ -78,13 +77,11 @@ void SpaceGame::Update()
 
     switch (current_state) {
     case GameState::Initialize:
-        //FUCK, Jimmy! Can't you see we're trying to have a FUCKIN Dick!
         current_state = GameState::Title;
         break;
 
     case GameState::Title:
         
-        //I am NOT gay! I knew it was 1216, one after Magna Carta, as if I would ever, EVER suck a cock!
         //if space bar{
         // current_state = GameState::StartGame
         //}
@@ -99,5 +96,5 @@ void SpaceGame::GTFO()
 
 void SpaceGame::Draw()
 {
-    //m_scene->Draw(parabellum::getEngine()Draw());
+    m_scene->Draw(parabellum::getEngine().getRenderer());
 }
