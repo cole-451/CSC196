@@ -3,6 +3,8 @@
 
 void parabellum::Actor::Update(float dt)
 {
+
+	//check to see if actor is dead
 	if (!stillAlive) { return; }
 
 	if (lifespan != 0) {
@@ -11,7 +13,7 @@ void parabellum::Actor::Update(float dt)
 			stillAlive = false;
 		}
 	}
-	// m_transform does huh times dt;
+
 	m_transform.position += velocity * dt;
 	//velocity *= 0; the overloads are const and DO NOT like this
 

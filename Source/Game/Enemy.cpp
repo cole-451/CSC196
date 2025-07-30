@@ -11,9 +11,9 @@ void Enemy::Update(float dt)
 	Actor* player = m_scene->GetActorByName("player");
 	if (player) {
 	vec2 direction{ 0,0 };
-	direction = player->transform.position - transform.position;
+	direction = player->m_transform.position - m_transform.position;
 	direction = direction.Normalized();
-	transform.rotation = parabellum::math::radius_to_degrees(direction.Angle());
+	m_transform.rotation = parabellum::math::radius_to_degrees(direction.Angle());
 
 	}
 

@@ -17,7 +17,10 @@ public:
 
 
 	void Update(float dt) override;
+	float speed;
+	float rotationRate;
 private:
+
 
 
 	// Inherited via Actor

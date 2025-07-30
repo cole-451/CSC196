@@ -21,7 +21,7 @@ void parabellum::InputSystem::GTFO()
 {
 	// nothing here.
 }
-void parabellum::InputSystem::Update()
+void parabellum::InputSystem::Update(float dt)
 {
 	//keyboard shit
 	prev_keyboard_state = keyboard_state;

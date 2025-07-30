@@ -18,6 +18,9 @@ bool Engine::initialize() {
 	m_audio = std::make_unique<audiosys>();
 	m_audio->init();
 
+	m_ps = std::make_unique<ParticleSystem>();
+	m_ps->initialize();
+
 	
 	return true;
 }
@@ -26,17 +29,20 @@ void Engine::GTFO() {
 	m_audio->GTFO();
 	m_inputsys->GTFO();
 	m_renderer->GTFO();
+	m_ps->GTFO();
 }
 
 void Engine::Draw()
 {
+	m_ps->Draw(*m_renderer);
 
 }
 
 void Engine::update() {
 	m_time.Tick();
-	m_inputsys->Update();
+	m_inputsys->Update(m_time.getDeltaTime()); // maybe get delta time as something???
 	m_audio->update();
+	m_ps->Update(m_time.getDeltaTime());
 }
 
 

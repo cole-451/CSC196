@@ -9,10 +9,8 @@
 void Player::Update(float dt)
 {
 
-	// make shit for rotation, thrusting and movement shit like that
+	
 	float rotate = 0;
-	float speed = 200;
-	float rotationRate = 0.0f;
 	float thrust = 0;
 
 	//rotate
@@ -23,7 +21,10 @@ void Player::Update(float dt)
 	if (parabellum::getEngine().getInputSys().getKeyDown(SDL_SCANCODE_D)) {
 		rotate += 1;
 	}
-	m_transform.rotation *= (rotate * rotationRate) * dt;
+	vec2 mousepos = getEngine().getInputSys().getMousePos();
+	m_transform.rotation = math::radius_to_degrees(( mousepos - m_transform.position).Angle()); // supposed to track mouse position to rotate
+		
+		m_transform.rotation += (rotate * rotationRate) * dt;
 
 	//thrust
 	if (parabellum::getEngine().getInputSys().getKeyDown(SDL_SCANCODE_W)) thrust = 1;
@@ -73,5 +74,6 @@ void Player::onCollision(Actor* other)
 {
 	if (tag != other->tag) {
 		stillAlive = false;
+		//dynamic_cast<SpaceGame*>(m_scene->GetGame())->OnPlayerDeath();
 	}
 }

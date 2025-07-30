@@ -32,6 +32,7 @@ using namespace parabellum;
 int main(int argc, char* argv[]) {
 
     File filesys;
+    filesys.SetCurrentDirectory("Assets");
     // you can dynamic cast similar objects into another. Maybe we can use this to turn enemies into players?
     
 
@@ -57,7 +58,6 @@ int main(int argc, char* argv[]) {
     getEngine().getAudioSys().init();
 
 
-    Time time;
     
 
     Scene scene1;
@@ -101,6 +101,7 @@ int main(int argc, char* argv[]) {
     SDL_Event e;
     bool quit = false;
 
+    spacegame->initialize();
 
 
 
@@ -121,10 +122,6 @@ int main(int argc, char* argv[]) {
     //audio->playSound(sound, 0, false, nullptr);
 
 
-   
-
-    // maybe make a controller?
-
     //MAIN LOOP
     while (!quit) {
         while (SDL_PollEvent(&e)) {
@@ -133,10 +130,8 @@ int main(int argc, char* argv[]) {
             }
         }
 
-        time.Tick();
-        //update
-        getEngine().getInputSys().Update();
-        getEngine().getAudioSys().update();
+        //update all Engine.cpp systems
+        getEngine().update();
 
        
         
@@ -148,7 +143,7 @@ int main(int argc, char* argv[]) {
 		float length = speed.length();
 
         vec3 color{ 0,0,1 };
-        spacegame->initialize();
+        
         getEngine().getRenderer().setColor(color.r, color.g, color.b); //switch
 
         //drawing
@@ -161,17 +156,12 @@ int main(int argc, char* argv[]) {
             getEngine().getRenderer().drawdot(star.x, star.y); // Draw each star
         }
 
-        
-        
-
-        //text->Draw(getEngine().getRenderer(), 40.0f, 40.0f);
-
-
+        //background drawing and updating.
         getEngine().getRenderer().setColor((uint8_t) 25, (uint8_t)25, (uint8_t)25);
         getEngine().getRenderer().clear(); // make the background black
        
-        spacegame->Draw();
         spacegame->Update();
+        spacegame->Draw(getEngine().getRenderer());
 
         getEngine().getRenderer().present(); // Render the screen
     }

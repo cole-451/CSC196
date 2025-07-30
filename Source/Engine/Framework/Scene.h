@@ -14,9 +14,7 @@ namespace parabellum {
 
 		void Draw(class Renderer& renderer);
 
-		void AddActor(std::unique_ptr<Actor> actor);
-
-		Actor* getActorByName(const std::string& name);
+		void AddActor(std::unique_ptr<class Actor> actor);
 
 		template <typename T>
 
@@ -26,9 +24,38 @@ namespace parabellum {
 		T* GetActorByName(const std::string& name);
 
 
+
 	private:
 		
+		class Game* m_game;
 		std::list<std::unique_ptr<class Actor>> actors;
 
 	};
+	template <typename T>
+	inline std::vector<T> Scene::getActorsByTag(const std::string& tag) {
+		std::vector<T> results;
+		for (auto& actor : actors) {
+			if (toLower(actor->tag) == toLower(tag)) {
+				T* object = dynamic_cast<T*>(actor.get());
+				if (object) {
+					results.push_back(object);
+				}
+			}
+		}
+		return results;
+	}
+	template<typename T>
+	T* Scene::GetActorByName(const std::string& name)
+	{
+
+		for (auto& actor : actors) {
+			if (toLower(actor->name) == toLower(name)) {
+				T* object = dynamic_cast<T*>(actor.get());
+				if (object) {
+					return object;
+				}
+			}
+		}
+		return nullptr;// maybe causing errors?
+	}
 }

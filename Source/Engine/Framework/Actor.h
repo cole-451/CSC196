@@ -4,10 +4,14 @@
 #include <string>
 #include <memory>
 #include "../Core/StringHelper.h"
-#include "Scene.h"
+//#include "Scene.h"
+#include "../Framework/Scene.h"
 
 
 namespace parabellum {
+
+	class Scene; // this fixes the 6 errors i get but fucks something else up
+	
 	class Actor {
 	public:
 
@@ -18,17 +22,17 @@ namespace parabellum {
 
 		float damping{ 0.0f };
 
-		Transform transform;
 
 		bool stillAlive = true;
 
 		float lifespan = 0;
 
 		Actor() = default;
-		Actor(const Transform& transform, class std::shared_ptr<Model> model):
-			m_transform{transform},
-			m_model{model}
-		{ }
+		Actor(const Transform& transform, class std::shared_ptr<Model> model) :
+			m_transform{ transform },
+			m_model{ model }
+		{
+		}
 
 		virtual void Update(float dt);
 
@@ -42,10 +46,8 @@ namespace parabellum {
 		float getRadius();
 		std::shared_ptr<Model> m_model;
 		Scene* m_scene;
+
 	protected:
 
-		
-
-		
 	};
 }

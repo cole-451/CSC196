@@ -26,7 +26,9 @@ public:
 
 	void GTFO() override;
 
-	void Draw() override;
+	void Draw(class Renderer& renderer) override;
+
+	void onPlayerDead();
 private:
 
 

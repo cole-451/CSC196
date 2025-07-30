@@ -22,7 +22,7 @@ namespace parabellum
 
 		void GTFO();
 
-		void Update();
+		void Update(float dt); // changed recently. come back if error
 
 
 		//KEYBOARD INPUTS:

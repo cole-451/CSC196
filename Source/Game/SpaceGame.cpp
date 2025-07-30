@@ -11,72 +11,35 @@
 #include "Renderer/Renderer.h"
 #include "Renderer/Font.h"
 #include "GameData.h"
-
+#include "Framework/Game.h"
 using namespace parabellum;
 bool SpaceGame::initialize() 
 {
 
     m_scene = std::make_unique<Scene>();
 
-
-    std::vector<vec2> model_points{ // player points for later.
-       { -5, -6 },
-    { 5, 0 },
-    { -5, 6 },
-    { -2, 0 },
-    { -5, -6 },
-    };
-    // makes a square by connecting these points.
-
-    // construct model with points above and preset color
+    //declare and create actor list
+    std::vector<std::unique_ptr<Actor>> actors;
+    
     std::shared_ptr<Model> model = std::make_shared<Model>(GameData::shipPoints, vec3{ 1.0f, 0.5f, 0.0f });
 
 
     Transform tf(vec2{ 500,500 }, 0.0f, 5.0f);
-
-
-    //declare and create actor list
-    std::vector<std::unique_ptr<Actor>> actors;
-
-   // Actor actor1(tf, model);
-
-    //make player
     std::unique_ptr<Player> player = std::make_unique<Player>(tf, model);
     player->name = "Player";
     player->tag = "player";
-    player->velocity = {5,0};
-    
+    player->speed = 200;
+    player->rotationRate = 2000;
+
     m_scene->AddActor(std::move(player));
 
-
-
-    
-
-    
-
-    /*
-    for (int i = 0; i < 10; i++) {
-        Transform tf(vec2{ random::getrandomfloat(), random::getrandomfloat() }, 0.0f, 1.0f);
-
-        Actor actor1(tf, model);
-        std::unique_ptr<Player> player = std::make_unique<Player>(tf, model);
-        actors.push_back(std::move(player));
-    }
-    
-    
-    
-    */
     return false;
 }
 
 void SpaceGame::Update()
 {
-    for (int i = 0; i < 10; i++) {
-        Transform transform{ vec2{ parabellum::random::getReal() * 1280, parabellum::random::getReal() * 1024 }, 0, 10 };
-        std::shared_ptr<Model> model = std::make_shared<Model>(GameData::enemyPoints, vec3{ 1.0f, 0.0f, 0.0f });
-        std::unique_ptr<Enemy> enemy = std::make_unique<Enemy>(transform, model);
-        m_scene->AddActor(std::move(enemy));
-    }
+    
+    m_scene->Update(getEngine().getTime().getDeltaTime());
 
     switch (current_state) {
     case GameState::Initialize:
@@ -86,10 +49,26 @@ void SpaceGame::Update()
     case GameState::Title:
         
         //if space bar{
-        // current_state = GameState::StartGame
+        current_state = GameState::StartGame;
         //}
         break;
 
+    case GameState::StartGame:
+        //m_score = 0;
+        //m_lives = 3;
+        //current_state = GameState::ComeGetSome;
+        break;
+    case GameState::ComeGetSome:
+        //create player
+        
+        //create enemies
+        for (int i = 0; i < 10; i++) {
+            Transform transform{ vec2{ parabellum::random::getReal() * 1280, parabellum::random::getReal() * 1024 }, 0, 10 };
+            std::shared_ptr<Model> model = std::make_shared<Model>(GameData::enemyPoints, vec3{ 1.0f, 0.0f, 0.0f });
+            std::unique_ptr<Enemy> enemy = std::make_unique<Enemy>(transform, model);
+            m_scene->AddActor(std::move(enemy));
+        }
+        break;
     }
 }
 
@@ -97,7 +76,15 @@ void SpaceGame::GTFO()
 {
 }
 
-void SpaceGame::Draw()
+void SpaceGame::Draw(parabellum::Renderer& renderer)
 {
-    m_scene->Draw(parabellum::getEngine().getRenderer());
+    if (current_state == GameState::Title) {
+        //titleText->Create(renderer, "shit fartious", vec3{ 1,0,0 });
+    }
+    m_scene->Draw(renderer);
+}
+
+void parabellum::SpaceGame::onPlayerDead()
+{
+    setLives(getLives()- 1);
 }

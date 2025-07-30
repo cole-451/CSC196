@@ -13,7 +13,7 @@ namespace parabellum {
 		virtual bool initialize() = 0;
 		virtual void Update() = 0;
 		virtual void GTFO() = 0;
-		virtual void Draw() = 0;
+		virtual void Draw(class Renderer& renderer) = 0;
 		
 		void addPoints(int points) {
 			m_score += points;

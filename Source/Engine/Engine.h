@@ -3,6 +3,7 @@
 #include "Renderer/Renderer.h"
 #include "Audio/AudioSys.h"
 #include "Input/InputSystem.h"
+#include "Renderer/ParticleSystem.h"
 
 #include <memory>
 
@@ -33,6 +34,10 @@ namespace parabellum {
 			return m_time;
 		}
 
+		ParticleSystem& getPS() {
+			return *m_ps;
+		}
+
 	private:
 		Time m_time;
 		std::unique_ptr<Renderer> m_renderer;
@@ -41,6 +46,7 @@ namespace parabellum {
 
 		std::unique_ptr<audiosys> m_audio;
 
+		std::unique_ptr<ParticleSystem> m_ps;
 
 
 		
