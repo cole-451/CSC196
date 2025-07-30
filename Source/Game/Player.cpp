@@ -28,15 +28,10 @@ void Player::Update(float dt)
 	//thrust
 	if (parabellum::getEngine().getInputSys().getKeyDown(SDL_SCANCODE_W)) thrust = 1;
 	if (parabellum::getEngine().getInputSys().getKeyDown(SDL_SCANCODE_S)) thrust = -1;
-
-	
-
-
-
-
-	
 	vec2 direction{ 1,0 };
-	vec2 force = direction.Rotate(m_transform.rotation) * speed;
+	vec2 force = direction.Rotate(math::degrees_to_radius(m_transform.rotation)) * thrust * speed;
+	velocity += force * dt;
+	// STILL CAN'T MOVE!!!
 
 	/*
 	

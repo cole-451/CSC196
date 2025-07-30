@@ -4,6 +4,7 @@
 #include <string>
 #include <memory>
 #include "../Core/StringHelper.h"
+#include "Scene.h"
 
 
 namespace parabellum {
@@ -37,13 +38,13 @@ namespace parabellum {
 
 		virtual void onCollision(Actor* other) = 0;
 
-		float getRadius();
-	protected:
 		Transform m_transform;
-
-		//Scene* scene = nullptr;
-		
+		float getRadius();
 		std::shared_ptr<Model> m_model;
+		Scene* m_scene;
+	protected:
+
+		
 
 		
 	};

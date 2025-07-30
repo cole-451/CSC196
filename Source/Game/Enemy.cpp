@@ -8,14 +8,16 @@ void Enemy::Update(float dt)
 {
 	//vec2 direction{0,0};
 
-	//Actor* player = m_scene->GetActorByName("player");
+	Actor* player = m_scene->GetActorByName("player");
+	if (player) {
+	vec2 direction{ 0,0 };
+	direction = player->transform.position - transform.position;
+	direction = direction.Normalized();
+	transform.rotation = parabellum::math::radius_to_degrees(direction.Angle());
 
-	//if (player) {
-		//direction = player->m_transform.position - m_transform.position;
-		// 
-	//}
+	}
 
-	//transform.rotation = parabellum::math::radToDeg(direction.Angle());
+	
 }
 
 void Enemy::onCollision(Actor* other)
