@@ -30,40 +30,6 @@ using namespace parabellum;
 
 int main(int argc, char* argv[]) {
 
-    // Test getInt() variants
-    std::cout << "Integer Functions:\n";
-    std::cout << "getInt(): " << parabellum::random::getInt() << "\n";
-    std::cout << "getInt(): " << parabellum::random::getInt() << "\n";
-    std::cout << "getInt(10): " << parabellum::random::getInt(10) << "\n";
-    std::cout << "getInt(10): " << parabellum::random::getInt(10) << "\n";
-    std::cout << "getInt(5, 15): " << parabellum::random::getInt(5, 15) << "\n";
-    std::cout << "getInt(5, 15): " << parabellum::random::getInt(5, 15) << "\n";
-    std::cout << "getInt(-10, 10): " << parabellum::random::getInt(-10, 10) << "\n\n";
-
-    // Test getReal() variants with float
-    std::cout << "Float Functions:\n";
-    std::cout << std::fixed << std::setprecision(6);
-    std::cout << "getReal<float>(): " << parabellum::random::getReal<float>() << "\n";
-    std::cout << "getReal<float>(): " << parabellum::random::getReal<float>() << "\n";
-    std::cout << "getReal<float>(5.0f): " << parabellum::random::getReal<float>(5.0f) << "\n";
-    std::cout << "getReal<float>(2.5f, 7.5f): " << parabellum::random::getReal<float>(2.5f, 7.5f) << "\n";
-    std::cout << "getReal<float>(-1.0f, 1.0f): " << parabellum::random::getReal<float>(-1.0f, 1.0f) << "\n\n";
-
-    // Test getReal() variants with double
-    std::cout << "Double Functions:\n";
-    std::cout << std::setprecision(10);
-    std::cout << "getReal<double>(): " << parabellum::random::getReal<double>() << "\n";
-    std::cout << "getReal<double>(100.0): " << parabellum::random::getReal<double>(100.0) << "\n";
-    std::cout << "getReal<double>(0.0, 2.0): " << parabellum::random::getReal<double>(0.0, 2.0) << "\n\n";
-
-    // Test getBool()
-    std::cout << "Boolean Functions:\n";
-    for (int i = 0; i < 10; ++i) {
-        std::cout << "getBool(): " << std::boolalpha << parabellum::random::getBool() << "\n";
-    }
-    std::cout << "\n";
-
-   
    
     // you can dynamic cast similar objects into another. Maybe we can use this to turn enemies into players?
     
