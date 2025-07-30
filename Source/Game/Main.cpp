@@ -18,6 +18,7 @@
 #include "SpaceGame.h"
 #include "Renderer/Font.h"
 #include "Renderer/Text.h"
+#include "Core/File.h"
 
 
 #include "Engine.h"
@@ -29,6 +30,48 @@
 using namespace parabellum;
 
 int main(int argc, char* argv[]) {
+
+    File filesys;
+
+    // Get current directory path
+    std::cout << "Directory Operations:\n";
+    std::cout << "Current directory: " << filesys.GetCurrentDirectory() << "\n";
+
+    // Set current directory path (current path + "Assets")
+    std::cout << "Setting directory to 'Assets'...\n";
+    filesys.SetCurrentDirectory("Assets");
+    std::cout << "New directory: " << filesys.GetCurrentDirectory() << "\n\n";
+
+    // Get filenames in the current directory
+    std::cout << "Files in Directory:\n";
+    auto filenames = filesys.GetFilesInDirectory(filesys.GetCurrentDirectory());
+    for (const auto& filename : filenames) {
+        std::cout << filename << "\n";
+    }
+    std::cout << "\n";
+
+    // Get filename (filename.extension) only
+    if (!filenames.empty()) {
+        std::cout << "Path Analysis:\n";
+        std::string filename = filesys.GetFilename(filenames[0]);
+        std::cout << "Filename only: " << filename << "\n";
+
+        // Get extension only
+        std::string ext = filesys.GetExtension(filenames[0]);
+        std::cout << "Extension: " << ext << "\n\n";
+    }
+
+    // Read and display text file
+    std::cout << "Text File Reading:\n";
+    std::string str;
+    bool success = filesys.ReadTextFile("test.txt", str);
+    if (success) {
+        std::cout << "Contents of test.txt:\n";
+        std::cout << str << "\n";
+    }
+    else {
+        std::cout << "Failed to read test.txt\n";
+    }
 
    
     // you can dynamic cast similar objects into another. Maybe we can use this to turn enemies into players?
