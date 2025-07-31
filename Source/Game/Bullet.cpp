@@ -7,7 +7,6 @@
 
 
 // When you get Enemy.cpp done, paste that shit here.
-// check yo phone, it can possibly help you!
 
 void Bullet::Update(float dt)
 {

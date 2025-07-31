@@ -3,6 +3,8 @@
 #include "Framework/Scene.h"
 #include "Renderer/Renderer.h"
 #include "Math/Math.h"
+#include "Renderer/ParticleSystem.h"
+#include "Core/Random.h"
 
 void Enemy::Update(float dt)
 {
@@ -28,7 +30,14 @@ void Enemy::onCollision(Actor* other)
 {
 	if (tag != other->tag) {
 		stillAlive = false;
-		//scene->getGame()->addPoints(100);
+		//m_scene->getGame()->addPoints(100);
+		parabellum::Particle particle;
+		particle.position = m_transform.position;
+		//particle.velocity = parabellum::random::onUnitCircle() * parabellum::random::getReal(10.0f, 200.0f);
+		particle.color = vec3{ 1, 1, 1 };
+		particle.lifespan = 2;
+
+		parabellum::getEngine().getPS().addParticle(particle);
 
 	}
 }

@@ -1,6 +1,7 @@
 #pragma once
 #include <cstdlib>
 #include <random>
+#include "../Math/Math.h"
 namespace parabellum {
 	namespace random {
 		/// <summary>
@@ -95,6 +96,13 @@ namespace parabellum {
 			return dist(generator());
 		}
 
+		/*inline vec2 onUnitCircle() {
+			float radians = getReal(math::twoPi);
+			vec2 v{};
+			v.x = parabellum::math::cosf(radians);
+			v.y = parabellum::math::sinf(radians);
+			return v;
+		}*/ 
 
 
 

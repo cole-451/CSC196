@@ -53,13 +53,3 @@ namespace parabellum {
 	// check for collisions
 	
 	}
-
-	
-
-	
-	
-	
-	//void Scene::AddActor(std::unique_ptr<Actor> actor)
-	//{
-	//	Find out why this is bugged.
-	//

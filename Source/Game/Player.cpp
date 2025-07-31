@@ -54,7 +54,7 @@ void Player::Update(float dt)
 		bullet->speed = 1000;
 		m_scene->AddActor(std::move(bullet));
 		// problem with the scene? it seems like its not pointing to a real scene when its out of update.
-
+		// upon further review, it is something to do with the list; i dont think it can fully add bullet
 	}
 
 	//ADDITIONAL: later, we can make some homing rockets or a ray that can make enemies join us

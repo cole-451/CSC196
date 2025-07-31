@@ -17,7 +17,7 @@ namespace parabellum {
 	public:
 		ParticleSystem() = default;
 
-		bool initialize();
+		bool initialize(int poolSize = 100);
 
 		void GTFO();
 

@@ -42,10 +42,18 @@ namespace parabellum::math {
 			return min + result;
 		}*/
 
+		/*template<typename T>
+		inline T Sign(T y) {
+			return (v < 0) ? (T) - 1 : (v > 0) ? (T) 1 : (T)0;
+		} Everything I have gotten from this class as of 7/22 just fucking breaks.*/ 
+
+
 		using std::min;
 		using std::max;
 		using std::sqrt;
 		using std::sqrtf;
+		using std::acos;
+		using std::acosf;
 		using std::sin;
 		using std::sinf;
 		using std::cos;

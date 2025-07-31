@@ -2,8 +2,8 @@
 #include "../Renderer/Renderer.h"
 
 namespace parabellum {
-	bool ParticleSystem::initialize() {
-		m_particles.resize(1000);
+	bool ParticleSystem::initialize(int poolSize) {
+		m_particles.resize(poolSize);
 
 		return true;
 	}

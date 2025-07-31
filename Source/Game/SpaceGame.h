@@ -31,7 +31,7 @@ public:
 	void onPlayerDead();
 private:
 
-
+	void spawnEnemy();
 	// Inherited via Game
 
 

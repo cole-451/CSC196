@@ -23,12 +23,16 @@ namespace parabellum {
 		template<typename T = Actor>
 		T* GetActorByName(const std::string& name);
 
+		
+
 
 
 	private:
 		
 		class Game* m_game;
-		std::list<std::unique_ptr<class Actor>> actors;
+
+		
+		std::list<std::unique_ptr<Actor>> actors; //list is having a lot of trouble.
 
 	};
 	template <typename T>
