@@ -18,5 +18,12 @@ namespace GameData {
         { -2, 0 },
         { -5, -6 },
     };
+
+    extern std::vector<vec2> bulletPoints{
+        { -1, -1 },
+    { 1, 0 },
+    { -1, 1 },
+    { -1, -1 },
+    };
     
 }

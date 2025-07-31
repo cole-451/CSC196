@@ -25,15 +25,16 @@ bool SpaceGame::initialize()
 
 
     Transform tf(vec2{ 500,500 }, 0.0f, 5.0f);
-    std::unique_ptr<Player> player = std::make_unique<Player>(tf, model);
+    auto player = std::make_unique<Player>(tf, model);
     player->name = "Player";
     player->tag = "player";
-    player->speed = 200;
+    player->speed = 500;
     player->rotationRate = 2000;
 
     m_scene->AddActor(std::move(player));
 
     return false;
+
 }
 
 void SpaceGame::Update()
@@ -66,6 +67,7 @@ void SpaceGame::Update()
             Transform transform{ vec2{ parabellum::random::getReal() * 1280, parabellum::random::getReal() * 1024 }, 0, 10 };
             std::shared_ptr<Model> model = std::make_shared<Model>(GameData::enemyPoints, vec3{ 1.0f, 0.0f, 0.0f });
             std::unique_ptr<Enemy> enemy = std::make_unique<Enemy>(transform, model);
+            enemy->name = "enemy" + i;
             m_scene->AddActor(std::move(enemy));
         }
         break;

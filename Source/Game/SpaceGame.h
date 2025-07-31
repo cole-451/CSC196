@@ -34,9 +34,11 @@ private:
 
 	// Inherited via Game
 
+
+
 	std::unique_ptr<parabellum::Scene> m_scene;
 
-	GameState current_state;
+	GameState current_state = GameState::Initialize;
 
 	float enemySpawnTimer = 0;
 

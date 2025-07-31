@@ -3,6 +3,11 @@
 #include "Input/InputSystem.h"
 #include "Math/Vector2.h"
 #include "Renderer/Renderer.h"
+#include "GameData.h"
+#include "Bullet.h"
+#include <iostream>
+#include "Framework/Scene.h"
+
 
 
 
@@ -23,8 +28,8 @@ void Player::Update(float dt)
 	}
 	vec2 mousepos = getEngine().getInputSys().getMousePos();
 	m_transform.rotation = math::radius_to_degrees(( mousepos - m_transform.position).Angle()); // supposed to track mouse position to rotate
-		
-		m_transform.rotation += (rotate * rotationRate) * dt;
+	//std::cout << m_transform.rotation << std::endl;
+		//m_transform.rotation += (rotate * rotationRate) * dt;
 
 	//thrust
 	if (parabellum::getEngine().getInputSys().getKeyDown(SDL_SCANCODE_W)) thrust = 1;
@@ -32,41 +37,31 @@ void Player::Update(float dt)
 	vec2 direction{ 1,0 };
 	vec2 force = direction.Rotate(math::degrees_to_radius(m_transform.rotation)) * thrust * speed;
 	velocity += force * dt;
-	// STILL CAN'T MOVE!!!
-
-	/*
-	
-	if (parabellum::getEngine().getInputSys().getKeyDown(SDL_SCANCODE_W)) {
-		direction.y += -1;
-	}
-	if (parabellum::getEngine().getInputSys().getKeyDown(SDL_SCANCODE_S)) {
-		direction.y += 1;
-	}
-	if (parabellum::getEngine().getInputSys().getKeyDown(SDL_SCANCODE_A)) {
-		direction.x += -1;
-	}
-	if (parabellum::getEngine().getInputSys().getKeyDown(SDL_SCANCODE_D)) {
-		direction.x += 1;
-	} // pressing anything gets you "vector subscript out of range"
-
-	if (direction.lengthSqr() > 0) {
-		direction = direction.Normalized();
-		m_transform.position += (direction * speed) * dt;
-	}
-	*/
-
-
-	//TODO: find what you need to include
+	// Can only move back and forth, so thrust does technically work!
 
 
 
 	//check button to fire bullet!
 
+	if (parabellum::getEngine().getInputSys().GetMouseButtonPressed(InputSystem::MouseButton::MOUSE_LEFT)) {
+		std::shared_ptr<Model> model = std::make_shared<Model>(GameData::bulletPoints, vec3{ 0.0f, 0.0f, 0.0f });
+
+
+		Transform tf(this->m_transform.position, this->m_transform.rotation, 2);
+		auto bullet = std::make_unique<Bullet>(tf, model);
+		bullet->name = "Bullet";
+		bullet->tag = "bullet";
+		bullet->speed = 1000;
+		m_scene->AddActor(std::move(bullet));
+		// problem with the scene? it seems like its not pointing to a real scene when its out of update.
+
+	}
+
 	//ADDITIONAL: later, we can make some homing rockets or a ray that can make enemies join us
 
 
 
-	//m_transform.position.x = parabellum::math::Wrap(m_transform.position.x) i cant fucking see dude
+	//m_transform.position.x = parabellum::math::Wrap(m_transform.position.x)
 	Actor::Update(dt);
 }
 

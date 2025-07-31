@@ -16,6 +16,10 @@ void Enemy::Update(float dt)
 	m_transform.rotation = parabellum::math::radius_to_degrees(direction.Angle());
 
 	}
+	vec2 force = vec2{ 1,0 }.Rotate(parabellum::math::degrees_to_radius(m_transform.rotation)) * dt;
+	velocity = force;
+
+	Actor::Update(dt);
 
 	
 }

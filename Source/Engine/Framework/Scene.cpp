@@ -40,6 +40,7 @@ namespace parabellum {
 	}
 	void Scene::AddActor(std::unique_ptr<Actor> actor)
 	{
+		actor->m_scene = this; // check on this later. im not sure if this is correct.
 		actors.push_back(std::move(actor));
 
 	}

@@ -13,7 +13,7 @@ namespace parabellum::math {
 		/// <param name="radius"></param>
 		/// <returns></returns>
 		constexpr float radius_to_degrees(float radius) {
-			return radius = (180 / pi);
+			return radius * (180 / pi);
 
 		}
 
@@ -23,7 +23,7 @@ namespace parabellum::math {
 		/// <param name="degrees"></param>
 		/// <returns></returns>
 		constexpr float degrees_to_radius(float degrees) {
-			return degrees = (pi / 180);
+			return degrees * (pi / 180);
 		}
 
 		constexpr int Wrap(int value, int min, int max) {
