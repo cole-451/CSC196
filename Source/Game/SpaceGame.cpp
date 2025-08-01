@@ -18,10 +18,7 @@ bool SpaceGame::initialize()
 {
 
     m_scene = std::make_unique<Scene>();
-    getEngine().getAudioSys().addSound("C:\Important Work\C++ Projects\CSC196\Build\Assets\clap.wav", "clap");
-    // works, but doesnt recognize the name
     
-    getEngine().getAudioSys().playSound("clap");
     //declare and create actor list
     std::vector<std::unique_ptr<Actor>> actors;
     
@@ -43,10 +40,10 @@ void SpaceGame::Update()
         break;
 
     case GameState::Title:
-        
-        //if space bar{
+        titleText->Draw(getEngine().getRenderer(), 25, 25);
+        if (parabellum::getEngine().getInputSys().getKeyDown(SDL_SCANCODE_K)) {
         current_state = GameState::StartGame;
-        //}
+        }
         break;
 
     case GameState::StartGame:
@@ -63,6 +60,15 @@ void SpaceGame::Update()
             spawnEnemy();
         }
         break;
+    case GameState::HesRottingYouKnow:
+
+        titleText->Create(getEngine().getRenderer(), "you died, press R to restart. lives left:\n" + getLives(), vec3{1,1,1});
+
+        // player dies, you can restart 3 times
+        break;
+    case GameState::YouFuckingSuck:
+        // close game
+        break;
     }
 }
 
@@ -73,10 +79,12 @@ void SpaceGame::GTFO()
 void SpaceGame::Draw(parabellum::Renderer& renderer)
 {
     if (current_state == GameState::Title) {
-        //m_titleFont->Load("Brianne_s_hand.ttf", 30); why are you NULL
+        m_titleFont = std::make_shared<Font>();
+        m_titleFont->Load("Brianne_s_hand.ttf", 30);// why are you NULL
         
-        //titleText->Create(getEngine().getRenderer(), "press enter to start", vec3{ 1,1,1 });
-    }
+        titleText = std::make_unique<Text>(m_titleFont);
+        titleText->Create(getEngine().getRenderer(), "press k to start", vec3{ 1,1,1 });
+    } // makes a write-access violation
     m_scene->Draw(renderer);
 }
 

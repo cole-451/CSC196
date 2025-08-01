@@ -43,17 +43,10 @@ int main(int argc, char* argv[]) {
   
     getEngine().initialize();
     SDL_Init(SDL_INIT_VIDEO);
-    //TODO: make this also into a unique_ptr and fix all the refrences below
-	//renderer.initialize();
+
     getEngine().getRenderer().initialize();
 
-    //std::unique_ptr<InputSystem> inputsys = std::make_unique<InputSystem>();
-    //inputsys->initialize();
     getEngine().getInputSys().initialize();
-
-    // create audio system
-    //std::unique_ptr<audiosys> audio = std::make_unique<audiosys>();
-    //audio->init();
 
     getEngine().getAudioSys().init();
 
@@ -68,13 +61,6 @@ int main(int argc, char* argv[]) {
     
      spacegame->initialize(); 
 
-
-    //Transform transform;
-
-
-    //create the player
-
-    
 
     void* extradriverdata = nullptr;
 
@@ -129,6 +115,10 @@ int main(int argc, char* argv[]) {
                 quit = true;
             }
         }
+        //getEngine().getAudioSys().addSound("clap.wav", "clap");
+        // works, but doesnt recognize the name
+
+        //getEngine().getAudioSys().playSound("clap");
 
         //update all Engine.cpp systems
         getEngine().update();
@@ -157,7 +147,7 @@ int main(int argc, char* argv[]) {
         }
 
         //background drawing and updating.
-        getEngine().getRenderer().setColor((uint8_t) 25, (uint8_t)25, (uint8_t)25);
+        getEngine().getRenderer().setColor((uint8_t) 0, (uint8_t)0, (uint8_t)0);
         getEngine().getRenderer().clear(); // make the background black
        
         spacegame->Update();

@@ -8,7 +8,6 @@
 
 void Enemy::Update(float dt)
 {
-	//vec2 direction{0,0};
 
 	Actor* player = m_scene->GetActorByName("player");
 	if (player) {
@@ -22,8 +21,6 @@ void Enemy::Update(float dt)
 	velocity = force;
 
 	Actor::Update(dt);
-
-	
 }
 
 void Enemy::onCollision(Actor* other)
