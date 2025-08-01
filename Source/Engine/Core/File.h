@@ -2,9 +2,7 @@
 #include <string>
 #include <vector>
 #include <filesystem>
-namespace parabellum {
-	class File {
-    public:
+namespace parabellum::File {
         std::string GetCurrentDirectory();
         bool SetCurrentDirectory(const std::string& path);
         std::string GetExtension(const std::string& path);
@@ -17,4 +15,3 @@ namespace parabellum {
         bool ReadTextFile(const std::string& path, std::string& content);
         bool WriteTextFile(const std::string& path, const std::string& content, bool append = false);
 	};
-}

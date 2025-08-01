@@ -31,24 +31,25 @@ using namespace parabellum;
 
 int main(int argc, char* argv[]) {
 
-    File filesys;
-    filesys.SetCurrentDirectory("Assets");
+   
+    parabellum::File::SetCurrentDirectory("Assets");
+
+    std::cout << File::GetCurrentDirectory() << std::endl;
+
+
     // you can dynamic cast similar objects into another. Maybe we can use this to turn enemies into players?
     
-
-    std::unique_ptr<SpaceGame> game = std::make_unique<SpaceGame>();
-	//Renderer renderer;
-
     //inits.
   
     getEngine().initialize();
     SDL_Init(SDL_INIT_VIDEO);
 
-    getEngine().getRenderer().initialize();
+    //initialize sounds
 
-    getEngine().getInputSys().initialize();
+    getEngine().getAudioSys().addSound("bass.wav", "bass");
 
-    getEngine().getAudioSys().init();
+    std::unique_ptr<SpaceGame> game = std::make_unique<SpaceGame>();
+
 
 
     
@@ -112,6 +113,9 @@ int main(int argc, char* argv[]) {
         // works, but doesnt recognize the name
 
         //getEngine().getAudioSys().playSound("clap.wav");
+
+
+    getEngine().getAudioSys().playSound("bass");
 
     //MAIN LOOP
     while (!quit) {
