@@ -49,6 +49,8 @@ bool parabellum::audiosys::addSound(const std::string& filename, const std::stri
 	FMOD::Sound* sound = nullptr;
 	system->createSound(filename.c_str(), FMOD_DEFAULT, 0, &sound); 
 
+	soundmap[key] = sound;
+
 	return true;
 }
 

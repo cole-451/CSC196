@@ -16,11 +16,12 @@
 using namespace parabellum;
 bool SpaceGame::initialize() 
 {
+    
 
     m_scene = std::make_unique<Scene>();
-    
     //declare and create actor list
     std::vector<std::unique_ptr<Actor>> actors;
+    
     
    
 
@@ -49,16 +50,21 @@ void SpaceGame::Update()
     case GameState::StartGame:
         m_score = 0;
         m_lives = 3;
+       // scoreText->Draw(getEngine().getRenderer(), 25, 25);
+        getEngine().getAudioSys().playSound("music");
         spawnPlayer();
         current_state = GameState::ComeGetSome;
         break;
     case GameState::ComeGetSome:
         //create player
+        
         enemySpawnTimer -= dt;
         if (enemySpawnTimer <= 0) {
             enemySpawnTimer = 5.0f;
             spawnEnemy();
         }
+        
+        //current_state = GameState::HesRottingYouKnow;
         break;
     case GameState::HesRottingYouKnow:
 
@@ -80,10 +86,15 @@ void SpaceGame::Draw(parabellum::Renderer& renderer)
 {
     if (current_state == GameState::Title) {
         m_titleFont = std::make_shared<Font>();
-        m_titleFont->Load("Brianne_s_hand.ttf", 30);// why are you NULL
+       // m_scoreFont = std::make_shared<Font>();
+        m_titleFont->Load("Brianne_s_hand.ttf", 30);
+       // m_scoreFont->Load("Brianne_s_hand.ttf", 50);
         
         titleText = std::make_unique<Text>(m_titleFont);
         titleText->Create(getEngine().getRenderer(), "press k to start", vec3{ 1,1,1 });
+        //scoreText = std::make_unique<Text>(m_scoreFont);
+        //scoreText->Create(getEngine().getRenderer(), "" + getPoints(), vec3{0,1,0});
+
     } // makes a write-access violation
     m_scene->Draw(renderer);
 }

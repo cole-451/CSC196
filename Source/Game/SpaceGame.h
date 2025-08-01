@@ -40,6 +40,8 @@ private:
 
 	std::unique_ptr<parabellum::Scene> m_scene;
 
+	std::unique_ptr<SpaceGame> m_game;
+
 	GameState current_state = GameState::Initialize;
 
 	float enemySpawnTimer = 0;

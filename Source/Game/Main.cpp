@@ -47,6 +47,9 @@ int main(int argc, char* argv[]) {
     //initialize sounds
 
     getEngine().getAudioSys().addSound("bass.wav", "bass");
+    getEngine().getAudioSys().addSound("music.mp3", "music");
+    getEngine().getAudioSys().addSound("Boom8.wav", "shoot");
+
 
     std::unique_ptr<SpaceGame> game = std::make_unique<SpaceGame>();
 
@@ -121,6 +124,7 @@ int main(int argc, char* argv[]) {
     while (!quit) {
         while (SDL_PollEvent(&e)) {
             if (e.type == SDL_EVENT_QUIT) {
+               
                 quit = true;
             }
         }
@@ -142,6 +146,10 @@ int main(int argc, char* argv[]) {
         getEngine().getRenderer().setColor(color.r, color.g, color.b); //switch
 
         //drawing
+
+        //background drawing and updating.
+        getEngine().getRenderer().setColor((uint8_t) 0, (uint8_t)0, (uint8_t)0);
+        getEngine().getRenderer().clear(); // make the background black
         for (auto& star : stars) {
             star += speed; // Move each star by speed
             if (star[0] > 1280 || star[1] > 1024) {
@@ -150,10 +158,6 @@ int main(int argc, char* argv[]) {
             getEngine().getRenderer().setColor((uint8_t)random::getInt() * 255, (uint8_t)random::getInt() * (uint8_t)random::getInt() * 255, (uint8_t)0, (uint8_t)255);
             getEngine().getRenderer().drawdot(star.x, star.y); // Draw each star
         }
-
-        //background drawing and updating.
-        getEngine().getRenderer().setColor((uint8_t) 0, (uint8_t)0, (uint8_t)0);
-        getEngine().getRenderer().clear(); // make the background black
        
         spacegame->Update();
         spacegame->Draw(getEngine().getRenderer());

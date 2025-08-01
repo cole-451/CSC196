@@ -25,6 +25,7 @@ void Bullet::onCollision(Actor* other)
 {
 	if (tag != other->tag) {
 		stillAlive = false;
+		
 	}
 	
 }

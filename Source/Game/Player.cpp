@@ -7,6 +7,8 @@
 #include "Bullet.h"
 #include <iostream>
 #include "Framework/Scene.h"
+#include "SpaceGame.h"
+#include "Framework/Game.h"
 
 
 
@@ -44,6 +46,7 @@ void Player::Update(float dt)
 	//check button to fire bullet!
 
 	if (parabellum::getEngine().getInputSys().GetMouseButtonPressed(InputSystem::MouseButton::MOUSE_LEFT)) {
+		getEngine().getAudioSys().playSound("shoot");
 		std::shared_ptr<Model> model = std::make_shared<Model>(GameData::bulletPoints, vec3{ 1.0f, 1.0f, 1.0f });
 
 
@@ -51,7 +54,7 @@ void Player::Update(float dt)
 		auto bullet = std::make_unique<Bullet>(tf, model);
 		bullet->name = "Bullet";
 		bullet->tag = "player";
-		bullet->speed = 999999;
+		bullet->speed = 9999999;
 		bullet->lifespan = 2.0f;
 		m_scene->AddActor(std::move(bullet));
 		// problem with the scene? it seems like its not pointing to a real scene when its out of update.
@@ -63,16 +66,20 @@ void Player::Update(float dt)
 	m_transform.position.x = parabellum::math::Wrap(m_transform.position.x, 0.0f, 1280.0f);
 	m_transform.position.y = parabellum::math::Wrap(m_transform.position.y, 0.0f, 1024.0f);
 
-
-
-	//m_transform.position.x = parabellum::math::Wrap(m_transform.position.x)
 	Actor::Update(dt);
 }
 
 void Player::onCollision(Actor* other)
 {
 	if (tag != other->tag) {
+		/*if (m_scene->getGame()->getLives() > 0) {
+			m_scene->getGame()->setLives(m_scene->getGame()->getLives() - 1);
+			return;
+		}*/
 		stillAlive = false;
-		//dynamic_cast<SpaceGame*>(m_scene->GetGame())->OnPlayerDeath();
+
+		//dynamic_cast<SpaceGame*>(m_scene->getGame())->onPlayerDead();
+		//getEngine().GTFO();
+		//exit(1);
 	}
 }
