@@ -14,7 +14,7 @@ namespace parabellum {
 		~Text();
 
 		bool Create(Renderer& renderer, const std::string& text, const vec3& color);
-		void Draw(Renderer& renderer, int x, int y);
+		void Draw(Renderer& renderer, float x, float y);
 
 	private:
 		friend class Renderer;

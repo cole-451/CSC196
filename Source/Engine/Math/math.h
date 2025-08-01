@@ -34,13 +34,13 @@ namespace parabellum::math {
 			return min + result;
 		}
 
-		/*constexpr float Wrap(float value, float min, float max) {
+		inline float Wrap(float value, float min, float max) {
 			float range = max - min;
-			float result = (value - min) % range;
+			float result = std::fmod(value - min, range);
 			if (result < 0) result += range;
 
 			return min + result;
-		}*/
+		}
 
 		/*template<typename T>
 		inline T Sign(T y) {

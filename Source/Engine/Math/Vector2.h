@@ -71,16 +71,16 @@ struct Vector2
 		return Vector2{ x / s, y / s };
 	}
 
-	Vector2 operator += (float s) const {
+	Vector2 operator += (float s) {
 		return Vector2{ x += s, y += s };
 	}
-	Vector2 operator -= (float s) const {
+	Vector2 operator -= (float s) {
 		return Vector2{ x -= s, y -= s };
 	}
-	Vector2 operator *= (float s) const {
+	Vector2 operator *= (float s) {
 		return Vector2{ x *= s, y *= s };
 	}
-	Vector2 operator /= (float s) const {
+	Vector2 operator /= (float s) {
 		return Vector2{ x /= s, y /= s };
 	}
 

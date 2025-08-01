@@ -25,7 +25,7 @@ namespace parabellum {
 
 		void setLives(int lives) { m_lives = lives; }
 	
-	private:
+	protected:
 		//list of what needs to be made?
 		std::unique_ptr<Scene> m_scene;
 		int m_score;

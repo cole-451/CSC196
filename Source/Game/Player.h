@@ -17,8 +17,8 @@ public:
 
 
 	void Update(float dt) override;
-	float speed;
-	float rotationRate;
+	float speed{ 0 };
+	float rotationRate{ 0 };
 private:
 
 

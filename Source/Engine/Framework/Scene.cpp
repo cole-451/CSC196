@@ -15,7 +15,7 @@ namespace parabellum {
 		//remove destroyed actors
 		for (auto iter = actors.begin(); iter != actors.end();) {
 			if (!(*iter)->stillAlive) {
-				actors.erase(iter);
+				iter = actors.erase(iter);
 			}
 			else {
 				iter++;
@@ -24,7 +24,7 @@ namespace parabellum {
 		for (auto& actorB : actors) {
 			for (auto& actorA : actors) {
 				//if one is destroyed, dont do anything
-				float distance = actorA->m_transform.position.length() - actorB->m_transform.position.length();
+				float distance = vec2{ actorA->m_transform.position - actorB->m_transform.position}.length();
 				if (distance <= actorA->getRadius() * actorB->getRadius()) {
 					actorA->onCollision(actorB.get());
 					actorB->onCollision(actorA.get());

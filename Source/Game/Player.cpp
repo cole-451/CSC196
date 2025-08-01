@@ -44,20 +44,24 @@ void Player::Update(float dt)
 	//check button to fire bullet!
 
 	if (parabellum::getEngine().getInputSys().GetMouseButtonPressed(InputSystem::MouseButton::MOUSE_LEFT)) {
-		std::shared_ptr<Model> model = std::make_shared<Model>(GameData::bulletPoints, vec3{ 0.0f, 0.0f, 0.0f });
+		std::shared_ptr<Model> model = std::make_shared<Model>(GameData::bulletPoints, vec3{ 1.0f, 1.0f, 1.0f });
 
 
-		Transform tf(this->m_transform.position, this->m_transform.rotation, 2);
+		Transform tf(this->m_transform.position, this->m_transform.rotation, 20);
 		auto bullet = std::make_unique<Bullet>(tf, model);
 		bullet->name = "Bullet";
-		bullet->tag = "bullet";
-		bullet->speed = 1000;
+		bullet->tag = "player";
+		bullet->speed = 999999;
+		bullet->lifespan = 2.0f;
 		m_scene->AddActor(std::move(bullet));
 		// problem with the scene? it seems like its not pointing to a real scene when its out of update.
 		// upon further review, it is something to do with the list; i dont think it can fully add bullet
+		// when AddActor is calling this, it cannot seem to actually connect the scene or game? I'm confused. m_game is null there.
 	}
 
 	//ADDITIONAL: later, we can make some homing rockets or a ray that can make enemies join us
+	m_transform.position.x = parabellum::math::Wrap(m_transform.position.x, 0.0f, 1280.0f);
+	m_transform.position.y = parabellum::math::Wrap(m_transform.position.y, 0.0f, 1024.0f);
 
 
 

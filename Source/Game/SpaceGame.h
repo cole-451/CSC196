@@ -8,7 +8,7 @@
 
 namespace parabellum{
 
-class SpaceGame : parabellum::Game {
+class SpaceGame : public parabellum::Game {
 public:
 	enum class GameState {
 		Initialize,
@@ -30,6 +30,8 @@ public:
 
 	void onPlayerDead();
 private:
+
+	void spawnPlayer();
 
 	void spawnEnemy();
 	// Inherited via Game

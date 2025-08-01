@@ -30,10 +30,12 @@ void Enemy::onCollision(Actor* other)
 {
 	if (tag != other->tag) {
 		stillAlive = false;
-		//m_scene->getGame()->addPoints(100);
+		m_scene->getGame();
 		parabellum::Particle particle;
 		particle.position = m_transform.position;
-		//particle.velocity = parabellum::random::onUnitCircle() * parabellum::random::getReal(10.0f, 200.0f);
+		//transform pos x and y stuff split into two seperate lines???
+		// 
+		//particle.velocity = parabellum::random::onUnitCircle() * parabellum::random::getReal(10.0f, 20.0f);
 		particle.color = vec3{ 1, 1, 1 };
 		particle.lifespan = 2;
 

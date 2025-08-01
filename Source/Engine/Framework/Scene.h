@@ -23,7 +23,7 @@ namespace parabellum {
 		template<typename T = Actor>
 		T* GetActorByName(const std::string& name);
 
-		
+		class Game* getGame() { return m_game; }
 
 
 

@@ -43,7 +43,7 @@ bool parabellum::audiosys::addSound(const std::string& filename, const std::stri
 	}
 
 	if (soundmap.find(key) != soundmap.end()) {
-		std::cerr << "audio name already exists you dumb fuck" << key << std::endl;
+		std::cerr << "audio name already exists" << key << std::endl;
 		return false;
 	}
 	FMOD::Sound* sound = nullptr;
