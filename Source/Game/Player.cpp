@@ -78,7 +78,7 @@ void Player::onCollision(Actor* other)
 		}*/
 		stillAlive = false;
 
-		//dynamic_cast<SpaceGame*>(m_scene->getGame())->onPlayerDead();
+		dynamic_cast<SpaceGame*>(m_scene->getGame())->onPlayerDead();
 		//getEngine().GTFO();
 		//exit(1);
 	}

@@ -27,7 +27,7 @@ namespace parabellum {
 	
 	protected:
 		//list of what needs to be made?
-		std::unique_ptr<Scene> m_scene;
+		//std::unique_ptr<Scene> m_scene;
 		int m_score;
 		int m_lives;
 	};

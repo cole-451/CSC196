@@ -25,7 +25,8 @@ void Bullet::onCollision(Actor* other)
 {
 	if (tag != other->tag) {
 		stillAlive = false;
-		
+		//m_scene->getGame()->addPoints(200);
+
 	}
 	
 }

@@ -57,7 +57,6 @@ int main(int argc, char* argv[]) {
 
     
 
-    Scene scene1;
 
 
     //create vidya game
@@ -168,6 +167,7 @@ int main(int argc, char* argv[]) {
 
     //getEngine().getRenderer().GTFO();
     
+    spacegame.release();
     getEngine().GTFO();
     
     return 0;

@@ -6,6 +6,7 @@
 #include "../Core/StringHelper.h"
 //#include "Scene.h"
 #include "../Framework/Scene.h"
+#include "../Framework/Game.h"
 
 
 namespace parabellum {

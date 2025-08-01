@@ -8,7 +8,9 @@
 namespace parabellum {
 	class Scene {
 	public:
-		Scene() = default;
+		Scene(class Game* game) :
+			m_game{game}{ }
+
 
 		void Update(float dt);
 
@@ -29,7 +31,7 @@ namespace parabellum {
 
 	private:
 		
-		class Game* m_game;
+		class Game* m_game{ nullptr };
 
 		
 		std::list<std::unique_ptr<Actor>> actors; //list is having a lot of trouble.

@@ -4,6 +4,7 @@
 #include "Renderer/Renderer.h"
 #include "Math/Math.h"
 #include "Renderer/ParticleSystem.h"
+#include "Framework/Game.h"
 #include "Core/Random.h"
 
 void Enemy::Update(float dt)
@@ -27,8 +28,9 @@ void Enemy::onCollision(Actor* other)
 {
 	if (tag != other->tag) {
 		stillAlive = false;
-		m_scene->getGame();
+		m_scene->getGame()->addPoints(100);
 		parabellum::Particle particle;
+
 		particle.position = m_transform.position;
 		//transform pos x and y stuff split into two seperate lines???
 		// 

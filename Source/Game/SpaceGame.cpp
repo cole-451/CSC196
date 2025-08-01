@@ -16,9 +16,17 @@
 using namespace parabellum;
 bool SpaceGame::initialize() 
 {
-    
+    m_titleFont = std::make_shared<Font>();
+     m_scoreFont = std::make_shared<Font>();
+    m_titleFont->Load("Brianne_s_hand.ttf", 30);
+     m_scoreFont->Load("Brianne_s_hand.ttf", 50);
 
-    m_scene = std::make_unique<Scene>();
+    titleText = std::make_unique<Text>(m_titleFont);
+    titleText->Create(getEngine().getRenderer(), "press k to start", vec3{ 1,1,1 });
+    scoreText = std::make_unique<Text>(m_scoreFont);
+    scoreText->Create(getEngine().getRenderer(), "" + std::to_string(m_score), vec3{0,1,0});
+
+    m_scene = std::make_unique<Scene>(this);
     //declare and create actor list
     std::vector<std::unique_ptr<Actor>> actors;
     
@@ -41,15 +49,15 @@ void SpaceGame::Update()
         break;
 
     case GameState::Title:
-        titleText->Draw(getEngine().getRenderer(), 25, 25);
+        //
         if (parabellum::getEngine().getInputSys().getKeyDown(SDL_SCANCODE_K)) {
         current_state = GameState::StartGame;
         }
+        m_lives = 3;
         break;
 
     case GameState::StartGame:
         m_score = 0;
-        m_lives = 3;
        // scoreText->Draw(getEngine().getRenderer(), 25, 25);
         getEngine().getAudioSys().playSound("music");
         spawnPlayer();
@@ -68,7 +76,10 @@ void SpaceGame::Update()
         break;
     case GameState::HesRottingYouKnow:
 
-        titleText->Create(getEngine().getRenderer(), "you died, press R to restart. lives left:\n" + getLives(), vec3{1,1,1});
+        titleText->Create(getEngine().getRenderer(), "you died, press R to restart." , vec3{1,0,0});
+        if (parabellum::getEngine().getInputSys().getKeyDown(SDL_SCANCODE_R)) {
+            current_state = GameState::StartGame;
+        }
 
         // player dies, you can restart 3 times
         break;
@@ -85,17 +96,17 @@ void SpaceGame::GTFO()
 void SpaceGame::Draw(parabellum::Renderer& renderer)
 {
     if (current_state == GameState::Title) {
-        m_titleFont = std::make_shared<Font>();
-       // m_scoreFont = std::make_shared<Font>();
-        m_titleFont->Load("Brianne_s_hand.ttf", 30);
-       // m_scoreFont->Load("Brianne_s_hand.ttf", 50);
-        
-        titleText = std::make_unique<Text>(m_titleFont);
-        titleText->Create(getEngine().getRenderer(), "press k to start", vec3{ 1,1,1 });
-        //scoreText = std::make_unique<Text>(m_scoreFont);
-        //scoreText->Create(getEngine().getRenderer(), "" + getPoints(), vec3{0,1,0});
+        titleText->Draw(getEngine().getRenderer(), 25, 25);
 
     } // makes a write-access violation
+
+    else if (current_state == GameState::HesRottingYouKnow) {
+        titleText->Draw(getEngine().getRenderer(), 0, 0);
+
+    }
+    else if (current_state == GameState::ComeGetSome) {
+        scoreText->Draw(getEngine().getRenderer(), 30, 30);
+    }
     m_scene->Draw(renderer);
 }
 
@@ -103,6 +114,7 @@ void parabellum::SpaceGame::onPlayerDead()
 {
     setLives(getLives()- 1);
     if (getLives() > 0) {
+        current_state = GameState::HesRottingYouKnow;
         // you can press R to restart. afterwards the game closes
     }
 }
