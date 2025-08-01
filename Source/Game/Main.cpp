@@ -107,6 +107,11 @@ int main(int argc, char* argv[]) {
 
     //audio->playSound(sound, 0, false, nullptr);
 
+        //getEngine().getAudioSys().addSound("clap.wav");
+        //getEngine().getAudioSys().update();
+        // works, but doesnt recognize the name
+
+        //getEngine().getAudioSys().playSound("clap.wav");
 
     //MAIN LOOP
     while (!quit) {
@@ -115,10 +120,6 @@ int main(int argc, char* argv[]) {
                 quit = true;
             }
         }
-        //getEngine().getAudioSys().addSound("clap.wav", "clap");
-        // works, but doesnt recognize the name
-
-        //getEngine().getAudioSys().playSound("clap");
 
         //update all Engine.cpp systems
         getEngine().update();
